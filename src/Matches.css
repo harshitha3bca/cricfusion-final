@@ -1,0 +1,820 @@
+/* ===================================================== 
+   CRICFUSION MATCHES PAGE 
+===================================================== */ 
+ 
+.matches-page { 
+  width: 100%; 
+  min-height: 100vh; 
+  margin: 0; 
+  padding: 0; 
+ 
+  background: 
+    radial-gradient( 
+      circle at 75% 30%, 
+      rgba(35, 85, 180, 0.25), 
+      transparent 35% 
+    ), 
+    linear-gradient( 
+      135deg, 
+      #02060d 0%, 
+      #061426 55%, 
+      #02060d 100% 
+    ); 
+ 
+  color: #ffffff; 
+ 
+  font-family: Arial, Helvetica, sans-serif; 
+ 
+  overflow-x: hidden; 
+} 
+ 
+.matches-page *, 
+.matches-page *::before, 
+.matches-page *::after { 
+  box-sizing: border-box; 
+} 
+ 
+ 
+/* ===================================================== 
+   NAVBAR 
+===================================================== */ 
+ 
+.matches-navbar { 
+  width: 100%; 
+  height: 76px; 
+ 
+  padding: 0 42px; 
+ 
+  display: flex; 
+  align-items: center; 
+ 
+  background: #020711; 
+ 
+  border-bottom: 1px solid rgba(116, 85, 200, 0.22); 
+ 
+  position: relative; 
+  z-index: 10; 
+} 
+ 
+ 
+/* LOGO */ 
+ 
+.matches-logo { 
+  width: 210px; 
+ 
+  display: flex; 
+  align-items: center; 
+ 
+  gap: 10px; 
+ 
+  flex-shrink: 0; 
+} 
+ 
+.matches-logo img { 
+  width: 43px; 
+  height: 43px; 
+ 
+  object-fit: contain; 
+} 
+ 
+.matches-logo span { 
+  font-size: 20px; 
+  font-weight: 700; 
+ 
+  background: linear-gradient( 
+    90deg, 
+    #ffffff, 
+    #9d62ff, 
+    #e84edb 
+  ); 
+ 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+ 
+  -webkit-text-fill-color: transparent; 
+} 
+ 
+ 
+/* NAV LINKS */ 
+ 
+.matches-nav-links { 
+  flex: 1; 
+ 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+ 
+  gap: 31px; 
+} 
+ 
+.matches-nav-links a { 
+  color: #bfc5d3; 
+ 
+  text-decoration: none; 
+ 
+  font-size: 14px; 
+  font-weight: 500; 
+ 
+  white-space: nowrap; 
+ 
+  transition: 0.2s ease; 
+} 
+ 
+.matches-nav-links a:hover, 
+.matches-nav-links a.active { 
+  color: #ffffff; 
+} 
+ 
+ 
+/* ===================================================== 
+   HEADER 
+===================================================== */ 
+ 
+.matches-header { 
+  width: 100%; 
+  max-width: 1100px; 
+ 
+  margin: 0 auto; 
+ 
+  padding: 70px 25px 40px; 
+ 
+  text-align: center; 
+} 
+ 
+.matches-small-title { 
+  margin: 0 0 12px; 
+ 
+  color: #a46cff; 
+ 
+  font-size: 13px; 
+ 
+  font-weight: 700; 
+ 
+  letter-spacing: 4px; 
+} 
+ 
+.matches-header h1 { 
+  margin: 0; 
+ 
+  color: #ffffff; 
+ 
+  font-size: 48px; 
+ 
+  font-weight: 800; 
+} 
+ 
+.matches-header h1 span { 
+  background: linear-gradient( 
+    90deg, 
+    #824cff, 
+    #c638ed, 
+    #ff4eae 
+  ); 
+ 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+ 
+  -webkit-text-fill-color: transparent; 
+} 
+ 
+.matches-header > p:last-child { 
+  margin: 15px 0 0; 
+ 
+  color: #8f98ab; 
+ 
+  font-size: 15px; 
+} 
+ 
+ 
+/* ===================================================== 
+   MATCHES CONTAINER 
+===================================================== */ 
+ 
+.matches-container { 
+  width: 100%; 
+  max-width: 1150px; 
+ 
+  margin: 0 auto; 
+ 
+  padding: 10px 25px 50px; 
+ 
+  display: grid; 
+ 
+  grid-template-columns: 
+    repeat(3, minmax(0, 1fr)); 
+ 
+  gap: 20px; 
+} 
+ 
+ 
+/* ===================================================== 
+   MATCH CARD 
+===================================================== */ 
+ 
+.match-card { 
+  position: relative; 
+ 
+  padding: 25px 22px; 
+ 
+  border-radius: 15px; 
+ 
+  background: 
+    linear-gradient( 
+      145deg, 
+      rgba(17, 32, 53, 0.98), 
+      rgba(7, 18, 33, 0.98) 
+    ); 
+ 
+  border: 1px solid rgba(116, 139, 175, 0.18); 
+ 
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.25); 
+ 
+  transition: 0.25s ease; 
+} 
+ 
+.match-card:hover { 
+  transform: translateY(-5px); 
+ 
+  border-color: rgba(140, 90, 255, 0.45); 
+ 
+  box-shadow: 
+    0 20px 45px rgba(69, 35, 150, 0.25); 
+} 
+ 
+ 
+/* STATUS */ 
+ 
+.match-status { 
+  display: inline-block; 
+ 
+  padding: 6px 10px; 
+ 
+  border-radius: 20px; 
+ 
+  color: #a879ff; 
+ 
+  background: rgba(117, 61, 230, 0.13); 
+ 
+  font-size: 9px; 
+ 
+  font-weight: 700; 
+ 
+  letter-spacing: 1px; 
+} 
+ 
+ 
+/* DATE */ 
+ 
+.match-date { 
+  margin-top: 16px; 
+ 
+  color: #747e94; 
+ 
+  font-size: 11px; 
+ 
+  font-weight: 600; 
+ 
+  letter-spacing: 1px; 
+ 
+  text-align: center; 
+} 
+ 
+ 
+/* ===================================================== 
+   TEAMS 
+===================================================== */ 
+ 
+.match-teams { 
+  margin: 25px 0; 
+ 
+  display: flex; 
+ 
+  align-items: center; 
+ 
+  justify-content: space-between; 
+ 
+  gap: 10px; 
+} 
+ 
+.team { 
+  flex: 1; 
+ 
+  text-align: center; 
+} 
+ 
+.team-logo { 
+  width: 58px; 
+  height: 58px; 
+ 
+  margin: 0 auto 10px; 
+ 
+  display: flex; 
+ 
+  align-items: center; 
+  justify-content: center; 
+ 
+  border-radius: 50%; 
+ 
+  color: #ffffff; 
+ 
+  font-size: 22px; 
+ 
+  font-weight: 800; 
+ 
+  box-shadow: 
+    0 0 20px rgba(100, 70, 255, 0.25); 
+ 
+  overflow: hidden; 
+} 
+ 
+.team-logo img { 
+  width: 100%; 
+  height: 100%; 
+ 
+  object-fit: contain; 
+  display: block; 
+} 
+ 
+.team-logo.purple { 
+  background: linear-gradient( 
+    135deg, 
+    #713cff, 
+    #bd3cff 
+  ); 
+} 
+ 
+.team-logo.blue { 
+  background: linear-gradient( 
+    135deg, 
+    #1675ff, 
+    #32c8ff 
+  ); 
+} 
+ 
+.team-logo.orange { 
+  background: linear-gradient( 
+    135deg, 
+    #ff702e, 
+    #ffb52e 
+  ); 
+} 
+ 
+.team-logo.red { 
+  background: linear-gradient( 
+    135deg, 
+    #e52d3f, 
+    #ff5c73 
+  ); 
+} 
+ 
+.team-logo.pink { 
+  background: linear-gradient( 
+    135deg, 
+    #d72bc4, 
+    #ff58b8 
+  ); 
+} 
+ 
+.team-logo.green { 
+  background: linear-gradient( 
+    135deg, 
+    #19a967, 
+    #48e69b 
+  ); 
+} 
+ 
+.team h3 { 
+  margin: 0; 
+ 
+  color: #e9ebf4; 
+ 
+  font-size: 12px; 
+ 
+  font-weight: 600; 
+} 
+ 
+.vs { 
+  color: #737d91; 
+ 
+  font-size: 11px; 
+ 
+  font-weight: 800; 
+} 
+ 
+ 
+/* ===================================================== 
+   MATCH INFORMATION 
+===================================================== */ 
+ 
+.match-info { 
+  padding: 13px 0; 
+ 
+  display: flex; 
+ 
+  flex-direction: column; 
+ 
+  gap: 8px; 
+ 
+  border-top: 1px solid rgba(255, 255, 255, 0.06); 
+ 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+ 
+  color: #929bae; 
+ 
+  font-size: 10px; 
+ 
+  text-align: center; 
+} 
+ 
+ 
+/* ===================================================== 
+   BOOK BUTTON 
+===================================================== */ 
+ 
+.book-btn { 
+  width: 100%; 
+ 
+  height: 42px; 
+ 
+  margin-top: 18px; 
+ 
+  border: none; 
+ 
+  border-radius: 8px; 
+ 
+  color: #ffffff; 
+ 
+  background: 
+    linear-gradient( 
+      90deg, 
+      #5722d8, 
+      #8b30ed 
+    ); 
+ 
+  font-family: inherit; 
+ 
+  font-size: 12px; 
+ 
+  font-weight: 700; 
+ 
+  cursor: pointer; 
+ 
+  box-shadow: 
+    0 0 18px rgba(104, 44, 230, 0.25); 
+ 
+  transition: 0.2s ease; 
+} 
+ 
+.book-btn:hover { 
+  transform: translateY(-2px); 
+ 
+  box-shadow: 
+    0 0 25px rgba(104, 44, 230, 0.45); 
+} 
+ 
+ 
+/* ===================================================== 
+   BACK HOME 
+===================================================== */ 
+ 
+.matches-back { 
+  width: 100%; 
+ 
+  padding: 0 25px 40px; 
+ 
+  text-align: center; 
+} 
+ 
+.matches-back button { 
+  padding: 10px 20px; 
+ 
+  border: 1px solid #58427f; 
+ 
+  border-radius: 7px; 
+ 
+  color: #b7a6d9; 
+ 
+  background: transparent; 
+ 
+  font-family: inherit; 
+ 
+  font-size: 12px; 
+ 
+  cursor: pointer; 
+ 
+  transition: 0.2s ease; 
+} 
+ 
+.matches-back button:hover { 
+  color: #ffffff; 
+ 
+  border-color: #8b5cff; 
+ 
+  background: rgba(105, 53, 210, 0.12); 
+} 
+ 
+ 
+/* ===================================================== 
+   RESPONSIVE 
+===================================================== */ 
+ 
+@media (max-width: 900px) { 
+ 
+  .matches-navbar { 
+    padding: 0 22px; 
+  } 
+ 
+  .matches-nav-links { 
+    gap: 17px; 
+  } 
+ 
+  .matches-logo { 
+    width: 170px; 
+  } 
+ 
+  .matches-container { 
+    grid-template-columns: 
+      repeat(2, minmax(0, 1fr)); 
+  } 
+} 
+ 
+ 
+@media (max-width: 650px) { 
+ 
+  .matches-navbar { 
+    height: auto; 
+ 
+    min-height: 75px; 
+ 
+    padding: 12px 18px; 
+ 
+    flex-wrap: wrap; 
+  } 
+ 
+  .matches-logo { 
+    width: auto; 
+  } 
+ 
+  .matches-nav-links { 
+    order: 3; 
+ 
+    width: 100%; 
+ 
+    justify-content: flex-start; 
+ 
+    overflow-x: auto; 
+ 
+    padding: 8px 0; 
+ 
+    gap: 22px; 
+  } 
+ 
+  .matches-header { 
+    padding: 45px 20px 30px; 
+  } 
+ 
+  .matches-header h1 { 
+    font-size: 38px; 
+  } 
+ 
+  .matches-container { 
+    grid-template-columns: 1fr; 
+ 
+    padding: 10px 18px 40px; 
+  } 
+} 
+
+
+/* ===================================================== 
+   IPL / WPL SWITCH 
+===================================================== */ 
+ 
+.league-buttons { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  gap: 12px; 
+ 
+  margin: 25px auto 20px; 
+} 
+ 
+.league-btn { 
+  min-width: 120px; 
+  height: 44px; 
+ 
+  padding: 0 25px; 
+ 
+  border-radius: 8px; 
+ 
+  border: 1px solid #6845c8; 
+ 
+  background: rgba(255, 255, 255, 0.03); 
+ 
+  color: #c8ccda; 
+ 
+  font-size: 14px; 
+  font-weight: 700; 
+ 
+  cursor: pointer; 
+ 
+  transition: 0.25s ease; 
+} 
+ 
+.league-btn:hover { 
+  background: rgba(105, 53, 210, 0.15); 
+  color: white; 
+} 
+ 
+.league-btn.active { 
+  color: white; 
+ 
+  border-color: transparent; 
+ 
+  background: 
+    linear-gradient( 
+      90deg, 
+      #5a25d9, 
+      #9134ef 
+    ); 
+ 
+  box-shadow: 
+    0 0 20px rgba(105, 45, 230, 0.35); 
+} 
+ 
+ 
+/* ===================================================== 
+   LEAGUE TITLE 
+===================================================== */ 
+ 
+.league-title { 
+  text-align: center; 
+ 
+  margin: 10px 0 25px; 
+ 
+  color: #a783ff; 
+ 
+  font-size: 12px; 
+ 
+  font-weight: 700; 
+ 
+  letter-spacing: 2px; 
+} 
+ 
+ 
+/* ===================================================== 
+   REAL TEAMS 
+===================================================== */ 
+ 
+.teams-section { 
+  width: 100%; 
+  max-width: 1100px; 
+ 
+  margin: 45px auto 0; 
+ 
+  padding: 0 25px 30px; 
+} 
+ 
+.teams-section h2 { 
+  margin: 0 0 18px; 
+ 
+  color: white; 
+ 
+  text-align: center; 
+ 
+  font-size: 22px; 
+} 
+ 
+.teams-list { 
+  display: grid; 
+ 
+  grid-template-columns: 
+    repeat(5, minmax(0, 1fr)); 
+ 
+  gap: 12px; 
+} 
+ 
+.team-name-card { 
+  min-height: 65px; 
+ 
+  display: flex; 
+ 
+  align-items: center; 
+  justify-content: center; 
+ 
+  padding: 12px; 
+ 
+  text-align: center; 
+ 
+  border-radius: 10px; 
+ 
+  background: 
+    linear-gradient( 
+      145deg, 
+      rgba(17, 32, 53, 0.98), 
+      rgba(7, 18, 33, 0.98) 
+    ); 
+ 
+  border: 1px solid rgba(116, 139, 175, 0.18); 
+ 
+  color: #d8dbea; 
+ 
+  font-size: 12px; 
+  font-weight: 600; 
+ 
+  transition: 0.2s ease; 
+} 
+ 
+.team-name-card:hover { 
+  border-color: rgba(132, 76, 255, 0.55); 
+ 
+  transform: translateY(-2px); 
+ 
+  color: white; 
+} 
+ 
+ 
+/* ===================================================== 
+   MOBILE 
+===================================================== */ 
+ 
+@media (max-width: 750px) { 
+ 
+  .teams-list { 
+    grid-template-columns: repeat(2, 1fr); 
+  } 
+ 
+  .league-btn { 
+    min-width: 105px; 
+  } 
+ 
+} 
+ 
+@media (max-width: 450px) { 
+ 
+  .teams-list { 
+    grid-template-columns: 1fr; 
+  } 
+ 
+} 
+
+
+/* ========================= 
+   IPL / WPL BUTTONS 
+========================= */ 
+ 
+.league-buttons { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  gap: 14px; 
+ 
+  margin: 10px auto 35px; 
+} 
+ 
+.league-btn { 
+  min-width: 130px; 
+  height: 45px; 
+ 
+  padding: 0 25px; 
+ 
+  border-radius: 8px; 
+ 
+  border: 1px solid #6845c8; 
+ 
+  background: rgba(255, 255, 255, 0.03); 
+ 
+  color: #bfc5d3; 
+ 
+  font-size: 14px; 
+  font-weight: 700; 
+ 
+  cursor: pointer; 
+ 
+  transition: 0.25s ease; 
+} 
+ 
+.league-btn:hover { 
+  color: white; 
+ 
+  border-color: #9b5cff; 
+ 
+  background: rgba(111, 50, 220, 0.15); 
+} 
+ 
+.league-btn.active-league { 
+  color: white; 
+ 
+  border-color: transparent; 
+ 
+  background: linear-gradient( 
+    90deg, 
+    #5a25d9, 
+    #9134ef 
+  ); 
+ 
+  box-shadow: 
+    0 0 20px rgba(105, 45, 230, 0.35); 
+}

@@ -1,0 +1,889 @@
+/* =====================================================
+   CRICFUSION - PLAYERS PAGE
+   BLACK + PURPLE + WHITE
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.players-page {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 10% 5%,
+      rgba(124, 58, 237, 0.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 35%,
+      rgba(168, 85, 247, 0.10),
+      transparent 25%
+    ),
+    #050505;
+
+  color: #ffffff;
+
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  padding-bottom: 70px;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.players-navbar {
+  min-height: 78px;
+
+  padding: 0 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  background: rgba(5, 5, 5, 0.96);
+
+  border-bottom:
+    1px solid rgba(139, 92, 246, 0.25);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+
+  backdrop-filter: blur(14px);
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.players-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: none;
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  flex-shrink: 0;
+}
+
+.players-logo img {
+  width: 44px;
+  height: 44px;
+
+  object-fit: contain;
+}
+
+.players-logo span {
+  font-size: 26px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.5px;
+}
+
+.players-logo span span {
+  color: #a855f7;
+}
+
+
+/* =====================================================
+   NAV LINKS
+===================================================== */
+
+.players-nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+}
+
+.players-nav-links button {
+  background: none;
+  border: none;
+
+  color: #bcbcbc;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 8px 0;
+
+  transition: 0.25s ease;
+}
+
+.players-nav-links button:hover {
+  color: white;
+}
+
+.players-nav-links button.active {
+  color: #c084fc;
+
+  position: relative;
+}
+
+.players-nav-links button.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: -7px;
+
+  height: 2px;
+
+  background: #8b5cf6;
+
+  border-radius: 10px;
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+.players-auth {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.players-auth button {
+  padding: 9px 16px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.players-auth button:first-child {
+  background: transparent;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.16);
+
+  color: white;
+}
+
+.players-auth button:first-child:hover {
+  border-color: #8b5cf6;
+}
+
+.players-auth button:last-child {
+  background: #7c3aed;
+
+  border: 1px solid #7c3aed;
+
+  color: white;
+}
+
+.players-auth button:last-child:hover {
+  background: #6d28d9;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.players-header {
+  text-align: center;
+
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  padding: 70px 20px 35px;
+}
+
+.players-label {
+  display: inline-block;
+
+  color: #c084fc;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 15px;
+}
+
+.players-header h1 {
+  margin: 0;
+
+  font-size: clamp(38px, 5vw, 56px);
+
+  font-weight: 900;
+
+  letter-spacing: -1.5px;
+}
+
+.players-header h1 span {
+  color: #a855f7;
+}
+
+.players-header p {
+  max-width: 620px;
+
+  margin: 15px auto 0;
+
+  color: #a5a5a5;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.players-container {
+  width: 92%;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   SQUAD SECTION
+===================================================== */
+
+.squad-section {
+  width: 100%;
+}
+
+.squad-title {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+.squad-title > span {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(124, 58, 237, 0.12);
+
+  border:
+    1px solid rgba(139, 92, 246, 0.25);
+
+  color: #c084fc;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+.squad-title h2 {
+  margin: 12px 0 5px;
+
+  font-size: clamp(24px, 4vw, 34px);
+
+  font-weight: 900;
+}
+
+.squad-title p {
+  margin: 0;
+
+  color: #777777;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   SQUAD PHOTO
+===================================================== */
+
+.squad-photo-wrapper {
+  position: relative;
+
+  width: min(650px, 100%);
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.30);
+
+  background: #101010;
+
+  box-shadow:
+    0 30px 80px
+    rgba(0, 0, 0, 0.55),
+
+    0 0 50px
+    rgba(124, 58, 237, 0.10);
+}
+
+.squad-photo {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+}
+
+
+/* =====================================================
+   PLAYER HOTSPOTS
+===================================================== */
+
+.player-hotspot {
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+
+  width: 10%;
+
+  aspect-ratio: 1 / 1;
+
+  padding: 0;
+
+  border: 2px solid transparent;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.player-hotspot span {
+  position: absolute;
+
+  inset: 15%;
+
+  border-radius: 50%;
+
+  border:
+    2px solid transparent;
+
+  transition: 0.2s ease;
+}
+
+.player-hotspot:hover {
+  border-color:
+    rgba(192, 132, 252, 0.9);
+
+  background:
+    rgba(124, 58, 237, 0.16);
+
+  box-shadow:
+    0 0 20px
+    rgba(168, 85, 247, 0.45);
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.08);
+}
+
+.player-hotspot:hover span {
+  border-color:
+    rgba(255, 255, 255, 0.75);
+}
+
+.player-hotspot.selected {
+  border-color: #c084fc;
+
+  background:
+    rgba(124, 58, 237, 0.22);
+
+  box-shadow:
+    0 0 25px
+    rgba(168, 85, 247, 0.65);
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.08);
+}
+
+.player-hotspot.selected span {
+  border-color: white;
+}
+
+
+/* =====================================================
+   INSTRUCTION
+===================================================== */
+
+.player-instruction {
+  width: min(650px, 100%);
+
+  margin: 20px auto 0;
+
+  padding: 17px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  background:
+    rgba(124, 58, 237, 0.08);
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  border-radius: 13px;
+}
+
+.player-instruction > span {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(124, 58, 237, 0.15);
+
+  font-size: 19px;
+}
+
+.player-instruction strong {
+  color: white;
+
+  font-size: 13px;
+}
+
+.player-instruction p {
+  margin: 4px 0 0;
+
+  color: #888888;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   SELECTED PLAYER
+===================================================== */
+
+.selected-player-card {
+  width: min(650px, 100%);
+
+  margin: 25px auto 0;
+
+  padding: 25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #171717,
+      #0c0c0c
+    );
+
+  border:
+    1px solid rgba(139, 92, 246, 0.40);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 25px 60px
+    rgba(0, 0, 0, 0.45),
+
+    0 0 40px
+    rgba(124, 58, 237, 0.08);
+
+  animation:
+    playerDetailsIn 0.3s ease;
+}
+
+@keyframes playerDetailsIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   PLAYER TOP
+===================================================== */
+
+.selected-player-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding-bottom: 20px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+.selected-player-avatar {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d28d9,
+      #a855f7
+    );
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 900;
+
+  box-shadow:
+    0 10px 30px
+    rgba(124, 58, 237, 0.30);
+}
+
+.selected-player-top span {
+  color: #a855f7;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.selected-player-top h2 {
+  margin: 3px 0;
+
+  color: white;
+
+  font-size: 24px;
+
+  font-weight: 900;
+}
+
+.selected-player-top p {
+  margin: 0;
+
+  color: #888888;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   PLAYER DETAILS GRID
+===================================================== */
+
+.player-detail-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.player-detail-box {
+  min-width: 0;
+
+  padding: 15px;
+
+  display: flex;
+
+  gap: 10px;
+
+  align-items: center;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.player-detail-box > span {
+  font-size: 20px;
+}
+
+.player-detail-box > div {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.player-detail-box small {
+  color: #686868;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.player-detail-box strong {
+  margin-top: 4px;
+
+  color: #d8d8d8;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-player-btn {
+  width: 100%;
+
+  margin-top: 18px;
+
+  padding: 11px 16px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #bdbdbd;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.close-player-btn:hover {
+  color: white;
+
+  border-color:
+    rgba(139, 92, 246, 0.50);
+
+  background:
+    rgba(124, 58, 237, 0.10);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.players-footer-text {
+  margin-top: 60px;
+
+  text-align: center;
+
+  color: #444444;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.players-footer-text strong {
+  color: #8b5cf6;
+
+  margin: 0 8px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .players-nav-links {
+    gap: 16px;
+  }
+
+  .players-nav-links button {
+    font-size: 12px;
+  }
+
+  .player-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .players-navbar {
+    padding: 15px 5%;
+
+    flex-wrap: wrap;
+  }
+
+  .players-nav-links {
+    width: 100%;
+
+    order: 3;
+
+    justify-content: center;
+
+    overflow-x: auto;
+
+    padding-bottom: 3px;
+  }
+
+  .players-auth {
+    margin-left: auto;
+  }
+
+  .players-header {
+    padding-top: 50px;
+  }
+
+  .players-container {
+    width: 94%;
+  }
+
+  .squad-photo-wrapper {
+    border-radius: 14px;
+  }
+
+  .player-hotspot {
+    width: 12%;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+  .players-logo span {
+    font-size: 22px;
+  }
+
+  .players-logo img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .players-auth {
+    gap: 5px;
+  }
+
+  .players-auth button {
+    padding: 8px 10px;
+
+    font-size: 11px;
+  }
+
+  .selected-player-card {
+    padding: 18px;
+  }
+
+  .selected-player-top h2 {
+    font-size: 20px;
+  }
+
+  .player-instruction {
+    padding: 14px;
+  }
+
+}

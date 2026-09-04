@@ -1,0 +1,445 @@
+/* =====================================================
+   CRICFUSION - HOW IT WORKS
+===================================================== */
+
+.how-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(91, 43, 255, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 45%,
+      rgba(190, 45, 255, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #02060d 0%,
+      #071426 55%,
+      #02060d 100%
+    );
+
+  color: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+}
+
+.how-page *,
+.how-page *::before,
+.how-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.how-navbar {
+  width: 100%;
+  height: 76px;
+
+  padding: 0 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: #020711;
+
+  border-bottom: 1px solid rgba(116, 85, 200, 0.22);
+}
+
+
+/* LOGO */
+
+.how-logo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.how-logo img {
+  width: 43px;
+  height: 43px;
+
+  object-fit: contain;
+}
+
+.how-logo span {
+  font-size: 20px;
+
+  font-weight: 700;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #9d62ff,
+    #e84edb
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* HOME BUTTON */
+
+.how-home-btn {
+  height: 40px;
+
+  padding: 0 18px;
+
+  border-radius: 7px;
+
+  border: 1px solid #6845c8;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.how-home-btn:hover {
+  background: rgba(104, 69, 200, 0.15);
+
+  border-color: #9d75ff;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.how-header {
+  text-align: center;
+
+  padding: 65px 20px 40px;
+}
+
+.how-header p {
+  margin: 0 0 12px;
+
+  color: #a783ff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 4px;
+}
+
+.how-header h1 {
+  margin: 0;
+
+  font-size: 52px;
+
+  line-height: 1;
+
+  font-weight: 800;
+}
+
+.how-header h1 span {
+  background: linear-gradient(
+    90deg,
+    #824cff,
+    #c638ed,
+    #ff4eae
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.how-header div {
+  margin-top: 18px;
+
+  color: #9299ad;
+
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   STEPS
+===================================================== */
+
+.how-steps {
+  width: 100%;
+
+  max-width: 1150px;
+
+  margin: 0 auto;
+
+  padding: 15px 25px 45px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+
+/* CARD */
+
+.how-card {
+  min-height: 245px;
+
+  padding: 30px 24px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 31, 53, 0.95),
+      rgba(7, 17, 31, 0.95)
+    );
+
+  border: 1px solid rgba(116, 139, 175, 0.17);
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition: 0.25s ease;
+}
+
+.how-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -70px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(112, 62, 255, 0.10);
+
+  filter: blur(20px);
+}
+
+.how-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(137, 91, 255, 0.45);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(100, 50, 230, 0.08);
+}
+
+
+/* NUMBER */
+
+.how-number {
+  position: absolute;
+
+  top: 17px;
+  right: 20px;
+
+  color: rgba(157, 117, 255, 0.45);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* ICON */
+
+.how-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 13px;
+
+  background: rgba(105, 53, 210, 0.15);
+
+  font-size: 26px;
+}
+
+
+/* TITLE */
+
+.how-card h2 {
+  margin: 0 0 11px;
+
+  color: #ffffff;
+
+  font-size: 17px;
+}
+
+
+/* TEXT */
+
+.how-card p {
+  margin: 0;
+
+  color: #858da3;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.how-bottom {
+  text-align: center;
+
+  padding: 10px 20px 45px;
+}
+
+.how-bottom h2 {
+  margin: 0 0 20px;
+
+  color: #c1c7d6;
+
+  font-size: 20px;
+
+  font-weight: 600;
+}
+
+.how-bottom h2 span {
+  color: #b46cff;
+}
+
+.how-bottom button {
+  height: 45px;
+
+  padding: 0 25px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5722d8,
+      #8b30ed
+    );
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 20px rgba(104, 44, 230, 0.3);
+
+  transition: 0.2s ease;
+}
+
+.how-bottom button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 28px rgba(104, 44, 230, 0.45);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .how-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .how-header h1 {
+    font-size: 44px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .how-navbar {
+    height: 70px;
+
+    padding: 0 18px;
+  }
+
+  .how-logo span {
+    font-size: 17px;
+  }
+
+  .how-home-btn {
+    padding: 0 12px;
+
+    font-size: 11px;
+  }
+
+  .how-header {
+    padding: 45px 20px 30px;
+  }
+
+  .how-header h1 {
+    font-size: 38px;
+  }
+
+  .how-header div {
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+  .how-steps {
+    grid-template-columns: 1fr;
+
+    padding: 10px 18px 35px;
+  }
+
+  .how-card {
+    min-height: auto;
+  }
+}

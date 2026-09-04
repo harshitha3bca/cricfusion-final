@@ -1,0 +1,1087 @@
+/* =====================================================
+   PAGE
+===================================================== */
+
+.seat-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(35, 130, 255, 0.16),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #040a15,
+      #071225 50%,
+      #030812
+    );
+
+  color: white;
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  padding-bottom: 60px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.seat-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  padding: 25px 5%;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+  background:
+    rgba(4,10,21,.88);
+
+  backdrop-filter:
+    blur(20px);
+}
+
+.seat-back-btn {
+  border:
+    1px solid rgba(255,255,255,.14);
+
+  background:
+    rgba(255,255,255,.06);
+
+  color: white;
+
+  padding:
+    11px 18px;
+
+  border-radius:
+    12px;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.seat-back-btn:hover {
+  background: white;
+  color: #07101f;
+}
+
+.seat-small-title {
+  margin: 0 0 5px;
+
+  color: #35d7ff;
+
+  font-size: 11px;
+
+  letter-spacing: 3px;
+
+  font-weight: 800;
+}
+
+.seat-header h1 {
+  margin: 0;
+
+  font-size:
+    clamp(25px,4vw,42px);
+}
+
+.seat-match-name {
+  margin: 5px 0 0;
+
+  color: #9eacc1;
+}
+
+
+/* =====================================================
+   LEGEND
+===================================================== */
+
+.seat-legend {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  padding:
+    17px 5%;
+
+  background:
+    rgba(255,255,255,.025);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+}
+
+.seat-legend div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #b6c2d4;
+
+  font-size: 12px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+}
+
+.legend-dot.available {
+  background: #21d487;
+}
+
+.legend-dot.limited {
+  background: #f2c53c;
+}
+
+.legend-dot.premium {
+  background: #ff8b38;
+}
+
+.legend-dot.booked {
+  background: #343d4d;
+}
+
+.legend-dot.selected {
+  background: #35aaff;
+
+  box-shadow:
+    0 0 12px #35aaff;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.seat-layout {
+  width: 92%;
+  max-width: 1550px;
+
+  margin:
+    28px auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,1.65fr)
+    minmax(360px,.65fr);
+
+  gap: 25px;
+}
+
+
+/* =====================================================
+   STADIUM CARD
+===================================================== */
+
+.stadium-map-card {
+  background:
+    rgba(9,19,37,.86);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius: 25px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.35);
+}
+
+
+/* =====================================================
+   STADIUM MAP
+===================================================== */
+
+.stadium-map {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 760px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle,
+      #10251c,
+      #07101b 62%,
+      #030811
+    );
+}
+
+
+/* =====================================================
+   OUTER STADIUM
+===================================================== */
+
+.stadium-outer {
+  position: relative;
+
+  width: min(92%, 790px);
+
+  aspect-ratio: 1 / 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #0b1717 0 42%,
+      #111c28 43% 58%,
+      #1b2938 59% 66%,
+      #080f18 67%
+    );
+
+  border:
+    14px solid #26374b;
+
+  box-shadow:
+    0 0 0 7px #0a1421,
+    0 0 45px rgba(0,0,0,.75),
+    inset 0 0 45px rgba(0,0,0,.8);
+}
+
+
+/* =====================================================
+   SEATING RING
+===================================================== */
+
+.stadium-seating-ring {
+  position: absolute;
+
+  left: 12%;
+  top: 12%;
+
+  width: 76%;
+  height: 76%;
+
+  border-radius: 50%;
+
+  border:
+    34px solid
+    rgba(83,100,117,.65);
+
+  box-shadow:
+    inset 0 0 0 5px #26394a,
+    inset 0 0 30px rgba(0,0,0,.8);
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   LIGHTS / DETAILS
+===================================================== */
+
+.stadium-lights {
+  position: absolute;
+
+  inset: 4%;
+
+  border-radius: 50%;
+
+  border:
+    2px dashed
+    rgba(255,255,255,.08);
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   FIELD
+===================================================== */
+
+.field-wrapper {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 52%;
+  height: 52%;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.outfield {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #247844 0 12px,
+      #2d8a4d 13px 25px
+    );
+
+  border:
+    5px solid
+    rgba(255,255,255,.2);
+
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,.35),
+    0 0 25px rgba(31,170,94,.15);
+}
+
+.boundary-line {
+  position: absolute;
+
+  inset: 5%;
+
+  border:
+    2px solid
+    rgba(255,255,255,.75);
+
+  border-radius: 50%;
+}
+
+.pitch {
+  position: absolute;
+
+  width: 17%;
+  height: 64%;
+
+  left: 41.5%;
+  top: 18%;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d0a46a,
+      #efd092,
+      #d1a56b
+    );
+
+  border:
+    2px solid
+    rgba(75,45,18,.45);
+
+  box-shadow:
+    0 0 10px rgba(0,0,0,.3);
+}
+
+.pitch-strip {
+  position: absolute;
+
+  inset: 6% 10%;
+
+  border:
+    1px solid
+    rgba(95,62,30,.3);
+
+  border-radius: 5px;
+}
+
+.crease {
+  position: absolute;
+
+  left: -18%;
+
+  width: 136%;
+
+  height: 2px;
+
+  background:
+    rgba(255,255,255,.8);
+}
+
+.crease-top {
+  top: 18%;
+}
+
+.crease-bottom {
+  bottom: 18%;
+}
+
+.pitch-middle-line {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 1px;
+  height: 100%;
+
+  background:
+    rgba(255,255,255,.25);
+}
+
+
+/* =====================================================
+   STANDS AROUND PITCH
+===================================================== */
+
+.stadium-section {
+  position: absolute;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index: 20;
+
+  width: 145px;
+
+  min-height: 58px;
+
+  padding:
+    8px 10px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  color: white;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    border-color .2s;
+
+  /*
+    Important:
+    prevents text from becoming giant
+    and keeps all stadium details inside
+    the circular stadium.
+  */
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+.stadium-section:hover {
+  transform:
+    translate(-50%,-50%)
+    scale(1.08);
+
+  z-index: 40;
+}
+
+.stadium-section.regular {
+  background:
+    linear-gradient(
+      145deg,
+      #123e32,
+      #0a211c
+    );
+
+  border-color:
+    rgba(40,220,145,.4);
+}
+
+.stadium-section.premium {
+  background:
+    linear-gradient(
+      145deg,
+      #63380e,
+      #241408
+    );
+
+  border-color:
+    rgba(255,165,65,.5);
+}
+
+.stadium-section.hospitality {
+  background:
+    linear-gradient(
+      145deg,
+      #452171,
+      #190c2e
+    );
+
+  border-color:
+    rgba(194,126,255,.55);
+}
+
+.stadium-section.section-active {
+  border-color:
+    #35caff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(53,202,255,.18),
+    0 0 25px
+    rgba(53,202,255,.45);
+}
+
+.section-type {
+  color: #7fe2ff;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.stadium-section strong {
+  font-size: 9px;
+
+  line-height: 1.2;
+
+  margin: 4px 0;
+
+  display: block;
+}
+
+.stadium-section small {
+  color: #fff;
+
+  font-size: 9px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   MAP NOTE
+===================================================== */
+
+.stadium-map-note {
+  margin-top: 12px;
+
+  text-align: center;
+
+  color: #728197;
+
+  font-size: 10px;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.seat-sidebar {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+
+/* =====================================================
+   SECTION SEATS
+===================================================== */
+
+.section-seat-card {
+  position: relative;
+
+  background:
+    rgba(10,20,39,.92);
+
+  border:
+    1px solid
+    rgba(53,202,255,.2);
+
+  border-radius: 20px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.3);
+}
+
+.section-card-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-right: 25px;
+
+  margin-bottom: 15px;
+}
+
+.section-card-header span {
+  color: #42d8ff;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  font-weight: 800;
+}
+
+.section-card-header h2 {
+  margin: 4px 0 0;
+
+  font-size: 16px;
+}
+
+.section-card-header strong {
+  color: #39d7ff;
+
+  white-space: nowrap;
+}
+
+.close-section {
+  position: absolute;
+
+  right: 13px;
+  top: 13px;
+
+  width: 25px;
+  height: 25px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   SEAT GRID
+===================================================== */
+
+.seat-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(14,1fr);
+
+  gap: 4px;
+
+  max-height: 250px;
+
+  overflow-y: auto;
+
+  padding: 5px;
+}
+
+.individual-seat {
+  height: 22px;
+
+  border: 0;
+
+  border-radius: 5px;
+
+  background: #21d487;
+
+  color: #06251a;
+
+  font-size: 6px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .15s;
+}
+
+.individual-seat:hover {
+  transform: scale(1.15);
+
+  z-index: 5;
+}
+
+.individual-seat.limited {
+  background: #f2c53c;
+}
+
+.individual-seat.booked {
+  background: #343d4d;
+
+  color: #758195;
+
+  cursor: not-allowed;
+}
+
+.individual-seat.premium {
+  background: #ff8c38;
+}
+
+.individual-seat.hospitality {
+  background: #bb72ff;
+}
+
+.individual-seat.selected {
+  background:
+    #35aaff !important;
+
+  color: white;
+
+  box-shadow:
+    0 0 0 2px white,
+    0 0 13px #35aaff;
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+.view-preview,
+.selected-card {
+  background:
+    rgba(10,20,39,.85);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 20px;
+
+  padding: 19px;
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.25);
+}
+
+.preview-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.preview-header h2,
+.selected-card h2 {
+  margin: 0 0 14px;
+
+  font-size: 17px;
+}
+
+.preview-header span {
+  color: #36d4ff;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   AI VIEW
+===================================================== */
+
+.view-image {
+  --seat-zoom: 1;
+
+  position: relative;
+
+  height: 230px;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+
+  background: #07101b;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  perspective: 800px;
+}
+
+.preview-sky {
+  position: absolute;
+
+  inset: 0;
+
+  height: 62%;
+
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255,255,255,.22),
+      transparent 17%
+    ),
+    linear-gradient(
+      180deg,
+      #071a35 0%,
+      #123c61 45%,
+      #3b788a 100%
+    );
+}
+
+.sun-glare {
+  position: absolute;
+
+  left: 62%;
+  top: 6%;
+
+  width: 140px;
+  height: 140px;
+
+  transform:
+    translate(-50%,0);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,244,214,.55),
+      transparent 65%
+    );
+
+  mix-blend-mode: screen;
+
+  filter: blur(6px);
+}
+
+.ai-stadium {
+  position: absolute;
+
+  left: 50%;
+  top: 25%;
+
+  width: 135%;
+  height: 47%;
+
+  transform:
+    translateX(-50%)
+    perspective(350px)
+    rotateX(12deg)
+    scale(
+      calc(
+        .9 +
+        .1 * var(--seat-zoom)
+      )
+    );
+
+  border-radius:
+    50% 50% 15% 15%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #68727d 0%,
+      #404a56 42%,
+      #242e39 72%,
+      #121b24 100%
+    );
+
+  box-shadow:
+    0 -12px 35px
+    rgba(0,0,0,.35);
+
+  transition:
+    transform .35s ease;
+}
+
+.ai-tier {
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+
+  border-radius: 50%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #6b7580 0 4px,
+      #303943 5px 8px
+    );
+}
+
+.ai-tier-back {
+  top: 7%;
+  height: 24%;
+  opacity: .8;
+}
+
+.ai-tier-middle {
+  left: 8%;
+  right: 8%;
+  top: 31%;
+  height: 27%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #7c8791 0 4px,
+      #3e4853 5px 8px
+    );
+}
+
+.ai-tier-front {
+  left: 12%;
+  right: 12%;
+  top: 59%;
+  height: 25%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #56616c 0 4px,
+      #252f39 5px 8px
+    );
+}
+
+.ai-scoreboard {
+  position: absolute;
+
+  left: 50%;
+  top: 10%;
+
+  width: 26%;
+  height: 12%;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      180deg,
+      #0e1f2c,
+      #060f16
+    );
+
+  border:
+    1px solid
+    rgba(120,220,255,.35);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 0 10px
+    rgba(80,210,255,.25);
+
+  z-index: 6;
+}
+
+.ai-scoreboard::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 22% 12%;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(120,220,255,.35) 0 3px,
+      transparent 4px 8px
+    );
+}
+
+
+/* =====================================================
+   CROWD
+===================================================== */
+
+.ai-crowd {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 12%;
+  right: 12%;
+
+  top: 40%;
+
+  height: 38px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-content: flex-start;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  overflow: hidden;
+}
+
+.ai-crowd i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d8dde1;
+}
+/* =====================================================
+   FIX: AVAILABLE SEATS MUST BE CLICKABLE
+===================================================== */
+
+.individual-seat {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+.individual-seat.available {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+.individual-seat.available:disabled {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+/* Only these should be unavailable */
+
+.individual-seat.booked,
+.individual-seat.locked,
+.individual-seat.reserved,
+.individual-seat.occupied {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
