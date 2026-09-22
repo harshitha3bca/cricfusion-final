@@ -1,0 +1,538 @@
+/* =====================================================
+   CRICFUSION - ADMIN TEAMS
+   BLACK + PURPLE + WHITE
+===================================================== */
+
+.admin-teams-page {
+  width: 100%;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-teams-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.admin-teams-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #a855f7;
+}
+
+.admin-teams-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.admin-teams-header p {
+  margin: 7px 0 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.admin-teams-add-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-teams-add-button:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 25px
+    rgba(168, 85, 247, 0.25);
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.admin-teams-error,
+.admin-teams-success {
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.admin-teams-error {
+  border: 1px solid
+    rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+}
+
+.admin-teams-success {
+  border: 1px solid
+    rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.08);
+  color: #86efac;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.admin-team-form-card,
+.admin-teams-card {
+  border: 1px solid
+    rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(15, 15, 25, 0.9);
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.25);
+}
+
+.admin-team-form-card {
+  margin-bottom: 22px;
+  padding: 22px;
+}
+
+.admin-team-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-team-form-heading span,
+.admin-teams-card-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: #a855f7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.admin-team-form-heading h3,
+.admin-teams-card-heading h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.admin-team-close-button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid
+    rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.admin-team-close-button:hover {
+  color: #ffffff;
+  border-color: rgba(
+    168,
+    85,
+    247,
+    0.5
+  );
+}
+
+.admin-team-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.admin-team-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admin-team-input-group label {
+  color: #d1d5db;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-team-input-group input,
+.admin-team-input-group select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid
+    rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  outline: none;
+  padding: 0 13px;
+  background: #0b0b12;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-team-input-group input::placeholder {
+  color: #5f6370;
+}
+
+.admin-team-input-group input:focus,
+.admin-team-input-group select:focus {
+  border-color: #a855f7;
+  box-shadow:
+    0 0 0 3px
+    rgba(168, 85, 247, 0.1);
+}
+
+.admin-team-input-group select option {
+  background: #11111a;
+  color: #ffffff;
+}
+
+.admin-team-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.admin-team-cancel-button,
+.admin-team-save-button {
+  border-radius: 9px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-team-cancel-button {
+  border: 1px solid
+    rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #d1d5db;
+}
+
+.admin-team-save-button {
+  border: none;
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+.admin-team-save-button:hover {
+  background: #8b5cf6;
+}
+
+.admin-team-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.admin-teams-card {
+  overflow: hidden;
+}
+
+.admin-teams-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+.admin-team-count {
+  border: 1px solid
+    rgba(168, 85, 247, 0.25);
+  border-radius: 20px;
+  padding: 7px 12px;
+  background: rgba(
+    168,
+    85,
+    247,
+    0.08
+  );
+  color: #c084fc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-teams-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-teams-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.admin-teams-table th {
+  padding: 13px 20px;
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.07);
+  background: rgba(
+    255,
+    255,
+    255,
+    0.015
+  );
+  color: #8f93a0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.admin-teams-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.05);
+  color: #d1d5db;
+  font-size: 13px;
+}
+
+.admin-teams-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-teams-table tbody tr:hover {
+  background: rgba(
+    168,
+    85,
+    247,
+    0.035
+  );
+}
+
+/* =====================================================
+   TEAM CELL
+===================================================== */
+
+.admin-team-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-team-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 1px solid
+    rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: #0b0b12;
+  overflow: hidden;
+  font-size: 18px;
+}
+
+.admin-team-logo img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.admin-team-name-cell strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-team-short-name {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 5px 9px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  );
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* =====================================================
+   LEAGUE
+===================================================== */
+
+.admin-team-league {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.admin-team-league.ipl {
+  background: rgba(
+    168,
+    85,
+    247,
+    0.12
+  );
+  color: #c084fc;
+}
+
+.admin-team-league.wpl {
+  background: rgba(
+    236,
+    72,
+    153,
+    0.12
+  );
+  color: #f9a8d4;
+}
+
+.admin-team-logo-status {
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.admin-team-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.admin-team-edit-button,
+.admin-team-delete-button {
+  border-radius: 7px;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-team-edit-button {
+  border: 1px solid
+    rgba(168, 85, 247, 0.3);
+  background: rgba(
+    168,
+    85,
+    247,
+    0.08
+  );
+  color: #c084fc;
+}
+
+.admin-team-delete-button {
+  border: 1px solid
+    rgba(239, 68, 68, 0.25);
+  background: rgba(
+    239,
+    68,
+    68,
+    0.06
+  );
+  color: #fca5a5;
+}
+
+.admin-team-edit-button:hover {
+  background: rgba(
+    168,
+    85,
+    247,
+    0.16
+  );
+}
+
+.admin-team-delete-button:hover {
+  background: rgba(
+    239,
+    68,
+    68,
+    0.12
+  );
+}
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.admin-teams-loading,
+.admin-teams-empty {
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.admin-teams-loading {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.admin-teams-empty > div {
+  margin-bottom: 10px;
+  font-size: 35px;
+}
+
+.admin-teams-empty h3 {
+  margin: 0 0 6px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-teams-empty p {
+  margin: 0;
+  color: #8f93a0;
+  font-size: 13px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+  .admin-teams-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-team-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .admin-team-form-card,
+  .admin-teams-card {
+    border-radius: 12px;
+  }
+
+  .admin-team-form-card {
+    padding: 16px;
+  }
+
+  .admin-teams-card-heading {
+    padding: 16px;
+  }
+}

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 
 import Home from "./Home.jsx";
 import Matches from "./Matches.jsx";
+import Stadiums from "./Stadiums.jsx";
 import StadiumDetails from "./StadiumDetails.jsx";
 import SeatSelection from "./SeatSelection.jsx";
 import Parking from "./Parking.jsx";
@@ -12,17 +14,19 @@ import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import Teams from "./Teams.jsx";
 import Players from "./Players.jsx";
+import AdminLogin from "./AdminLogin.jsx";
+import AdminDashboard from "./AdminDashboard.jsx";
 
+const API_URL =
+  `${window.location.protocol}//${window.location.hostname}:5000/api`;
 
 function App() {
-
   /* =====================================================
      PAGE
   ===================================================== */
 
   const [currentPage, setCurrentPage] =
     useState("home");
-
 
   /* =====================================================
      BOOKING DATA
@@ -40,168 +44,323 @@ function App() {
   const [confirmedBooking, setConfirmedBooking] =
     useState(null);
 
+  /* =====================================================
+     QR TICKET LOADING
+  ===================================================== */
+
+  const [qrTicketLoading, setQrTicketLoading] =
+    useState(false);
+
+  const [qrTicketError, setQrTicketError] =
+    useState("");
+
+  /* =====================================================
+     SELECTED TEAM
+  ===================================================== */
+
+  const [selectedTeam, setSelectedTeam] =
+    useState(null);
 
   /* =====================================================
      AUTH CHECK
   ===================================================== */
 
   const isLoggedIn = () => {
-
     const token =
       localStorage.getItem("token");
 
     return Boolean(token);
   };
 
+  /* =====================================================
+     QR TICKET URL
+
+     Example:
+     http://192.168.1.5:5173/ticket/CF-ABC123
+  ===================================================== */
+
+  useEffect(() => {
+    const path =
+      window.location.pathname || "";
+
+    const parts =
+      path.split("/").filter(Boolean);
+
+    if (
+      parts.length === 2 &&
+      parts[0].toLowerCase() === "ticket" &&
+      parts[1]
+    ) {
+      const bookingReference =
+        decodeURIComponent(parts[1]);
+
+      setCurrentPage("qr-ticket");
+
+      const loadQrTicket = async () => {
+        try {
+          setQrTicketLoading(true);
+          setQrTicketError("");
+
+          const response = await fetch(
+            `${API_URL}/bookings/ticket/${encodeURIComponent(
+              bookingReference
+            )}`
+          );
+
+          const data =
+            await response.json();
+
+          if (!response.ok) {
+            throw new Error(
+              data?.message ||
+                "Unable to load ticket"
+            );
+          }
+
+          const ticket =
+            data?.booking ||
+            data?.ticket ||
+            data?.data;
+
+          if (!ticket) {
+            throw new Error(
+              "Ticket information was not found"
+            );
+          }
+
+          setConfirmedBooking(ticket);
+          setBookingData(ticket);
+
+          if (ticket.match) {
+            setSelectedMatch(
+              ticket.match
+            );
+
+            if (
+              ticket.match.stadium
+            ) {
+              setSelectedStadium(
+                ticket.match.stadium
+              );
+            }
+          }
+
+          setCurrentPage(
+            "qr-ticket"
+          );
+        } catch (error) {
+          console.error(
+            "QR ticket loading error:",
+            error
+          );
+
+          setQrTicketError(
+            error.message ||
+              "Unable to load this ticket."
+          );
+        } finally {
+          setQrTicketLoading(false);
+        }
+      };
+
+      loadQrTicket();
+    }
+  }, []);
 
   /* =====================================================
      HOME
   ===================================================== */
 
   const goHome = () => {
+    window.history.pushState(
+      {},
+      "",
+      "/"
+    );
 
     setCurrentPage("home");
-
   };
-
 
   /* =====================================================
      MATCHES
-     AVAILABLE WITHOUT LOGIN
   ===================================================== */
 
   const goMatches = () => {
-
     setCurrentPage("matches");
-
   };
 
+  /* =====================================================
+     STADIUMS
+  ===================================================== */
+
+  const goStadiums = () => {
+    setCurrentPage("stadiums");
+  };
+
+  /* =====================================================
+     SELECT STADIUM
+  ===================================================== */
+
+  const handleStadiumSelect = (
+    stadium
+  ) => {
+    setSelectedStadium(stadium);
+
+    setSelectedMatch(null);
+
+    setBookingData(null);
+
+    setCurrentPage("stadium");
+  };
 
   /* =====================================================
      LOGIN
   ===================================================== */
 
   const openLogin = () => {
-
     setCurrentPage("login");
-
   };
-
 
   /* =====================================================
      REGISTER
   ===================================================== */
 
   const openRegister = () => {
-
     setCurrentPage("register");
-
   };
 
+  /* =====================================================
+     ADMIN LOGIN
+  ===================================================== */
+
+  const openAdminLogin = () => {
+    setCurrentPage("admin-login");
+  };
+
+  /* =====================================================
+     ADMIN LOGIN SUCCESS
+  ===================================================== */
+
+  const handleAdminLoginSuccess = () => {
+    setCurrentPage(
+      "admin-dashboard"
+    );
+  };
 
   /* =====================================================
      TEAMS
-     LOGIN REQUIRED
   ===================================================== */
 
   const goTeams = () => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
     setCurrentPage("teams");
-
   };
-
 
   /* =====================================================
      PLAYERS
-     LOGIN REQUIRED
   ===================================================== */
 
-  const goPlayers = () => {
-
-    if (!isLoggedIn()) {
-
-      setCurrentPage("login");
-
-      return;
-    }
+  const goPlayers = (
+    team = null
+  ) => {
+    setSelectedTeam(team);
 
     setCurrentPage("players");
-
   };
-
 
   /* =====================================================
      BOOK TICKETS
-     LOGIN REQUIRED
   ===================================================== */
 
   const handleStadium = (
     stadium,
     match
   ) => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
+    const preservedMatch = {
+      ...match,
+
+      parkingMode:
+        match?.parkingMode ||
+        "unavailable",
+    };
 
     setSelectedStadium(
       stadium
     );
 
     setSelectedMatch(
-      match
+      preservedMatch
     );
+
+    setBookingData({
+      stadium: stadium,
+
+      match: preservedMatch,
+
+      parkingMode:
+        preservedMatch.parkingMode,
+    });
 
     setCurrentPage(
       "stadium"
     );
-
   };
-
 
   /* =====================================================
      STADIUM → SEATS
-     LOGIN REQUIRED
   ===================================================== */
 
   const handleStadiumContinue = (
     stadiumData
   ) => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
+    const currentParkingMode =
+      selectedMatch?.parkingMode ||
+      bookingData?.parkingMode ||
+      "unavailable";
+
+    const currentMatch = {
+      ...selectedMatch,
+
+      parkingMode:
+        currentParkingMode,
+    };
+
+    setSelectedMatch(
+      currentMatch
+    );
 
     setBookingData({
-
       stadium:
         stadiumData,
 
       match:
-        selectedMatch,
+        currentMatch,
 
+      parkingMode:
+        currentParkingMode,
     });
 
-
-    setCurrentPage("seats");
-
+    setCurrentPage(
+      "seats"
+    );
   };
-
 
   /* =====================================================
      SEATS → PARKING
@@ -210,29 +369,142 @@ function App() {
   const handleSeatsContinue = (
     seatData
   ) => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
+    const currentParkingMode =
+      bookingData?.parkingMode ||
+      selectedMatch?.parkingMode ||
+      "unavailable";
+
+    const currentMatch = {
+      ...(bookingData?.match ||
+        selectedMatch),
+
+      parkingMode:
+        currentParkingMode,
+    };
+
+    let seats = [];
+
+    if (
+      Array.isArray(seatData?.seats) &&
+      seatData.seats.length > 0
+    ) {
+      seats = seatData.seats;
+    } else if (
+      Array.isArray(bookingData?.seats) &&
+      bookingData.seats.length > 0
+    ) {
+      seats = bookingData.seats;
+    } else {
+      try {
+        const matchId =
+          currentMatch?._id ||
+          currentMatch?.id ||
+          currentMatch?.matchId ||
+          "unknown";
+
+        const storageKey =
+          `cricfusion_selected_seats_${String(
+            matchId
+          )}`;
+
+        const storedSeats =
+          sessionStorage.getItem(
+            storageKey
+          );
+
+        if (storedSeats) {
+          const parsedSeats =
+            JSON.parse(storedSeats);
+
+          if (
+            Array.isArray(parsedSeats) &&
+            parsedSeats.length > 0
+          ) {
+            seats = parsedSeats;
+          }
+        }
+      } catch (error) {
+        console.error(
+          "Unable to restore selected seats:",
+          error
+        );
+      }
+    }
+
+    const seatIds =
+      Array.isArray(seatData?.seatIds) &&
+      seatData.seatIds.length > 0
+        ? seatData.seatIds
+        : seats
+            .map(
+              (seat) =>
+                seat?._id ||
+                seat?.id ||
+                seat?.seatId
+            )
+            .filter(Boolean);
+
+    const seatTotal =
+      seatData?.seatTotal !== undefined
+        ? Number(
+            seatData.seatTotal
+          )
+        : seats.reduce(
+            (total, seat) =>
+              total +
+              Number(
+                seat?.price || 0
+              ),
+            0
+          );
+
+    const newBookingData = {
+      ...bookingData,
+
+      ...seatData,
+
+      match:
+        currentMatch,
+
+      parkingMode:
+        currentParkingMode,
+
+      seats:
+        seats,
+
+      seatIds:
+        seatIds,
+
+      seatTotal:
+        seatTotal,
+
+      total:
+        seatData?.total !== undefined
+          ? Number(
+              seatData.total
+            )
+          : seatTotal,
+
+      lockedUntil:
+        seatData?.lockedUntil ||
+        bookingData?.lockedUntil ||
+        null,
+    };
 
     setBookingData(
-      (previousData) => ({
-        ...previousData,
-        ...seatData,
-      })
+      newBookingData
     );
-
 
     setCurrentPage(
       "parking"
     );
-
   };
-
 
   /* =====================================================
      PARKING → PAYMENT
@@ -241,50 +513,49 @@ function App() {
   const handleParkingContinue = (
     parkingData
   ) => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
-
     setBookingData(
       (previousData) => ({
         ...previousData,
+
         ...parkingData,
+
+        match:
+          parkingData?.match ||
+          previousData?.match ||
+          selectedMatch,
+
+        parkingMode:
+          parkingData?.parkingMode ||
+          previousData?.parkingMode ||
+          selectedMatch?.parkingMode ||
+          "unavailable",
       })
     );
-
 
     setCurrentPage(
       "payment"
     );
-
   };
-
 
   /* =====================================================
      PAYMENT → PARKING
   ===================================================== */
 
   const handlePaymentBack = () => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
-
-    setCurrentPage(
-      "parking"
-    );
-
+    setCurrentPage("parking");
   };
-
 
   /* =====================================================
      PAYMENT SUCCESS → TICKET
@@ -293,7 +564,6 @@ function App() {
   const handlePaymentSuccess = (
     booking
   ) => {
-
     setConfirmedBooking(
       booking
     );
@@ -301,77 +571,58 @@ function App() {
     setCurrentPage(
       "ticket"
     );
-
   };
-
 
   /* =====================================================
      TICKET → HOME
   ===================================================== */
 
   const handleTicketHome = () => {
-
-    setCurrentPage(
-      "home"
+    window.history.pushState(
+      {},
+      "",
+      "/"
     );
 
-    setBookingData(
-      null
-    );
+    setCurrentPage("home");
 
-    setConfirmedBooking(
-      null
-    );
+    setBookingData(null);
 
-    setSelectedMatch(
-      null
-    );
+    setConfirmedBooking(null);
 
-    setSelectedStadium(
-      null
-    );
+    setSelectedMatch(null);
 
+    setSelectedStadium(null);
   };
-
 
   /* =====================================================
      MY BOOKINGS
-     LOGIN REQUIRED
   ===================================================== */
 
   const handleMyBookings = () => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
 
-
     setCurrentPage(
       "mybookings"
     );
-
   };
-
 
   /* =====================================================
      VIEW TICKET
-     LOGIN REQUIRED
   ===================================================== */
 
   const handleViewTicket = (
     booking
   ) => {
-
     if (!isLoggedIn()) {
-
       setCurrentPage("login");
 
       return;
     }
-
 
     setConfirmedBooking(
       booking
@@ -380,33 +631,124 @@ function App() {
     setCurrentPage(
       "ticket"
     );
-
   };
-
 
   /* =====================================================
      LOGIN SUCCESS
   ===================================================== */
 
   const handleLoginSuccess = () => {
-
-    setCurrentPage(
-      "home"
-    );
-
+    setCurrentPage("home");
   };
 
+  /* =====================================================
+     QR TICKET PAGE
+
+     IMPORTANT:
+     NO LOGIN REQUIRED.
+  ===================================================== */
+
+  if (
+    currentPage === "qr-ticket"
+  ) {
+    if (qrTicketLoading) {
+      return (
+        <div
+          style={{
+            minHeight: "100vh",
+            background: "#000",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+          }}
+        >
+          Loading your CricFusion ticket...
+        </div>
+      );
+    }
+
+    if (qrTicketError) {
+      return (
+        <div
+          style={{
+            minHeight: "100vh",
+            background: "#000",
+            color: "#fff",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "30px",
+          }}
+        >
+          <h2>
+            Ticket Not Found
+          </h2>
+
+          <p>
+            {qrTicketError}
+          </p>
+
+          <button
+            type="button"
+            onClick={() => {
+              window.history.pushState(
+                {},
+                "",
+                "/"
+              );
+
+              setCurrentPage(
+                "home"
+              );
+            }}
+            style={{
+              marginTop: "20px",
+              padding:
+                "12px 24px",
+              border: "none",
+              borderRadius:
+                "8px",
+              cursor: "pointer",
+            }}
+          >
+            Back to CricFusion
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <Ticket
+        booking={
+          confirmedBooking
+        }
+
+        bookingData={
+          confirmedBooking
+        }
+
+        onHome={
+          handleTicketHome
+        }
+
+        onMyBookings={
+          handleMyBookings
+        }
+      />
+    );
+  }
 
   /* =====================================================
-     HOME PAGE
-
-     HOME REMAINS AVAILABLE WITHOUT LOGIN.
+     HOME
   ===================================================== */
 
   if (
     currentPage === "home"
   ) {
-
     return (
       <Home
         onLogin={
@@ -424,25 +766,35 @@ function App() {
         onTeams={
           goTeams
         }
+
+        onPlayers={
+          goPlayers
+        }
+
+        onStadiums={
+          goStadiums
+        }
+
+        onAdminLogin={
+          openAdminLogin
+        }
+
+        onMyBookings={
+          handleMyBookings
+        }
       />
     );
-
   }
 
-
   /* =====================================================
-     MATCHES PAGE
-
-     AVAILABLE WITHOUT LOGIN.
+     MATCHES
   ===================================================== */
 
   if (
     currentPage === "matches"
   ) {
-
     return (
       <Matches
-
         onBackToHome={
           goHome
         }
@@ -451,23 +803,62 @@ function App() {
           handleStadium
         }
 
+        onTeams={
+          goTeams
+        }
+
+        onPlayers={
+          goPlayers
+        }
+
+        onStadiums={
+          goStadiums
+        }
       />
     );
-
   }
 
+  /* =====================================================
+     STADIUMS
+  ===================================================== */
+
+  if (
+    currentPage === "stadiums"
+  ) {
+    return (
+      <Stadiums
+        onHome={
+          goHome
+        }
+
+        onSelectStadium={
+          handleStadiumSelect
+        }
+
+        onMatches={
+          goMatches
+        }
+
+        onTeams={
+          goTeams
+        }
+
+        onPlayers={
+          goPlayers
+        }
+      />
+    );
+  }
 
   /* =====================================================
-     LOGIN PAGE
+     LOGIN
   ===================================================== */
 
   if (
     currentPage === "login"
   ) {
-
     return (
       <Login
-
         onBackToHome={
           goHome
         }
@@ -479,24 +870,19 @@ function App() {
         onLoginSuccess={
           handleLoginSuccess
         }
-
       />
     );
-
   }
 
-
   /* =====================================================
-     REGISTER PAGE
+     REGISTER
   ===================================================== */
 
   if (
     currentPage === "register"
   ) {
-
     return (
       <Register
-
         onBackToHome={
           goHome
         }
@@ -504,28 +890,74 @@ function App() {
         onLogin={
           openLogin
         }
-
       />
     );
-
   }
 
+  /* =====================================================
+     ADMIN LOGIN
+  ===================================================== */
+
+  if (
+    currentPage === "admin-login"
+  ) {
+    return (
+      <AdminLogin
+        onBackToHome={
+          goHome
+        }
+
+        onAdminLoginSuccess={
+          handleAdminLoginSuccess
+        }
+      />
+    );
+  }
+
+  /* =====================================================
+     ADMIN DASHBOARD
+  ===================================================== */
+
+  if (
+    currentPage === "admin-dashboard"
+  ) {
+    return (
+      <AdminDashboard
+        onLogout={() => {
+          localStorage.removeItem(
+            "token"
+          );
+
+          localStorage.removeItem(
+            "user"
+          );
+
+          localStorage.removeItem(
+            "isAdmin"
+          );
+
+          setCurrentPage(
+            "home"
+          );
+        }}
+
+        onHome={
+          goHome
+        }
+      />
+    );
+  }
 
   /* =====================================================
      TEAMS
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "teams"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -537,16 +969,12 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
-
 
     return (
       <Teams
-
         onHome={
           goHome
         }
@@ -555,48 +983,26 @@ function App() {
           goPlayers
         }
 
+        onMatches={
+          goMatches
+        }
+
+        onStadiums={
+          goStadiums
+        }
       />
     );
-
   }
-
 
   /* =====================================================
      PLAYERS
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "players"
   ) {
-
-    if (!isLoggedIn()) {
-
-      return (
-        <Login
-
-          onBackToHome={
-            goHome
-          }
-
-          onRegister={
-            openRegister
-          }
-
-          onLoginSuccess={
-            handleLoginSuccess
-          }
-
-        />
-      );
-
-    }
-
-
     return (
       <Players
-
         onHome={
           goHome
         }
@@ -605,48 +1011,30 @@ function App() {
           goTeams
         }
 
+        onMatches={
+          goMatches
+        }
+
+        onStadiums={
+          goStadiums
+        }
+
+        selectedTeam={
+          selectedTeam
+        }
       />
     );
-
   }
-
 
   /* =====================================================
      STADIUM
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "stadium"
   ) {
-
-    if (!isLoggedIn()) {
-
-      return (
-        <Login
-
-          onBackToHome={
-            goHome
-          }
-
-          onRegister={
-            openRegister
-          }
-
-          onLoginSuccess={
-            handleLoginSuccess
-          }
-
-        />
-      );
-
-    }
-
-
     return (
       <StadiumDetails
-
         stadium={
           selectedStadium
         }
@@ -655,35 +1043,35 @@ function App() {
           selectedMatch
         }
 
-        onBack={
-          goMatches
-        }
+        onBack={() => {
+          if (selectedMatch) {
+            goMatches();
+          } else {
+            goStadiums();
+          }
+        }}
 
         onContinue={
           handleStadiumContinue
         }
 
+        onSeatSelectionComplete={
+          handleSeatsContinue
+        }
       />
     );
-
   }
-
 
   /* =====================================================
      SEATS
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "seats"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -695,18 +1083,15 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
-
 
     return (
       <SeatSelection
-
         match={
-          selectedMatch
+          selectedMatch ||
+          bookingData?.match
         }
 
         stadium={
@@ -726,28 +1111,20 @@ function App() {
         onContinue={
           handleSeatsContinue
         }
-
       />
     );
-
   }
-
 
   /* =====================================================
      PARKING
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "parking"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -759,18 +1136,18 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
 
+    const parkingMatch =
+      bookingData?.match ||
+      selectedMatch;
 
     return (
       <Parking
-
         match={
-          selectedMatch
+          parkingMatch
         }
 
         stadium={
@@ -778,7 +1155,8 @@ function App() {
         }
 
         selectedSeats={
-          bookingData?.seats || []
+          bookingData?.seats ||
+          []
         }
 
         bookingData={
@@ -794,28 +1172,20 @@ function App() {
         onContinue={
           handleParkingContinue
         }
-
       />
     );
-
   }
-
 
   /* =====================================================
      PAYMENT
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "payment"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -827,16 +1197,12 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
-
 
     return (
       <Payment
-
         match={
           selectedMatch
         }
@@ -852,29 +1218,20 @@ function App() {
         onSuccess={
           handlePaymentSuccess
         }
-
       />
-
     );
-
   }
 
-
   /* =====================================================
-     TICKET
-
-     LOGIN REQUIRED
+     NORMAL TICKET
   ===================================================== */
 
   if (
     currentPage === "ticket"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -886,16 +1243,12 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
-
 
     return (
       <Ticket
-
         booking={
           confirmedBooking
         }
@@ -911,28 +1264,20 @@ function App() {
         onMyBookings={
           handleMyBookings
         }
-
       />
     );
-
   }
-
 
   /* =====================================================
      MY BOOKINGS
-
-     LOGIN REQUIRED
   ===================================================== */
 
   if (
     currentPage === "mybookings"
   ) {
-
     if (!isLoggedIn()) {
-
       return (
         <Login
-
           onBackToHome={
             goHome
           }
@@ -944,16 +1289,12 @@ function App() {
           onLoginSuccess={
             handleLoginSuccess
           }
-
         />
       );
-
     }
-
 
     return (
       <MyBookings
-
         onHome={
           goHome
         }
@@ -961,12 +1302,9 @@ function App() {
         onViewTicket={
           handleViewTicket
         }
-
       />
     );
-
   }
-
 
   /* =====================================================
      FALLBACK
@@ -974,7 +1312,6 @@ function App() {
 
   return (
     <Home
-
       onLogin={
         openLogin
       }
@@ -991,10 +1328,23 @@ function App() {
         goTeams
       }
 
+      onPlayers={
+        goPlayers
+      }
+
+      onStadiums={
+        goStadiums
+      }
+
+      onAdminLogin={
+        openAdminLogin
+      }
+
+      onMyBookings={
+        handleMyBookings
+      }
     />
   );
-
 }
-
 
 export default App;

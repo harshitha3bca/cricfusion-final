@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./Home.css";
 
@@ -7,49 +8,119 @@ function Home({
   onMatches,
   onHowItWorks,
   onTeams,
+  onPlayers,
+  onStadiums,
+  onAdminLogin,
+  onMyBookings,
 }) {
-
   const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     Boolean(localStorage.getItem("token"))
   );
 
-  const handleHowItWorks = () => {
+  const [showSettings, setShowSettings] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
+  const [accountUser, setAccountUser] = useState({});
 
-    // If App.jsx provides a handler, use it
+  const [isEditingAccount, setIsEditingAccount] = useState(false);
+  const [editName, setEditName] = useState("");
+  const [editEmail, setEditEmail] = useState("");
+
+  const getUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      return {};
+    }
+  };
+
+  const user = accountUser;
+
+  const handleHowItWorks = () => {
     if (onHowItWorks) {
       onHowItWorks();
       return;
     }
 
-    // Otherwise open the How It Works popup here
     setShowHowItWorks(true);
   };
 
+  const handleSettingsClick = () => {
+    setShowSettings((previous) => !previous);
+  };
 
-  /* ================= LOGOUT ================= */
+  const handleAccountClick = () => {
+    const currentUser = getUser();
+
+    setAccountUser(currentUser);
+    setEditName(currentUser?.name || "");
+    setEditEmail(currentUser?.email || "");
+    setIsEditingAccount(false);
+
+    setShowAccount(true);
+    setShowSettings(false);
+  };
+
+  const handleEditAccount = () => {
+    setEditName(user?.name || "");
+    setEditEmail(user?.email || "");
+    setIsEditingAccount(true);
+  };
+
+  const handleCancelEdit = () => {
+    setEditName(user?.name || "");
+    setEditEmail(user?.email || "");
+    setIsEditingAccount(false);
+  };
+
+  const handleSaveAccount = () => {
+    const currentUser = getUser();
+
+    const updatedUser = {
+      ...currentUser,
+      name: editName.trim(),
+      email: editEmail.trim(),
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    setAccountUser(updatedUser);
+    setIsEditingAccount(false);
+  };
+
+  const handleMyBookings = () => {
+    setShowSettings(false);
+
+    if (onMyBookings) {
+      onMyBookings();
+    }
+  };
 
   const handleLogout = () => {
-
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("isAdmin");
 
+    setShowSettings(false);
+    setShowAccount(false);
     setIsLoggedIn(false);
 
     window.location.reload();
   };
 
-
   return (
     <div className="home-page">
 
-      {/* ================= NAVBAR ================= */}
+      {/* =====================================================
+          NAVBAR
+      ===================================================== */}
 
       <nav className="navbar">
 
-        <div className="logo-section">
+        {/* LOGO */}
 
+        <div className="logo-section">
           <img
             src="/cricfusion-logo-transparent.png"
             alt="CricFusion"
@@ -58,9 +129,10 @@ function Home({
           <span>
             CricFusion
           </span>
-
         </div>
 
+
+        {/* NAVIGATION */}
 
         <div className="nav-links">
 
@@ -71,48 +143,57 @@ function Home({
             Home
           </a>
 
-
           <a
             href="#matches"
-            onClick={(e) => {
-
-              e.preventDefault();
+            onClick={(event) => {
+              event.preventDefault();
 
               if (onMatches) {
                 onMatches();
               }
-
             }}
           >
             Matches
           </a>
 
-
           <a
             href="#teams"
-            onClick={(e) => {
-
-              e.preventDefault();
+            onClick={(event) => {
+              event.preventDefault();
 
               if (onTeams) {
                 onTeams();
               }
-
             }}
           >
             Teams
           </a>
 
+          <a
+            href="#players"
+            onClick={(event) => {
+              event.preventDefault();
 
-          <a href="#players">
+              if (onPlayers) {
+                onPlayers();
+              }
+            }}
+          >
             Players
           </a>
 
+          <a
+            href="#stadiums"
+            onClick={(event) => {
+              event.preventDefault();
 
-          <a href="#stadiums">
+              if (onStadiums) {
+                onStadiums();
+              }
+            }}
+          >
             Stadiums
           </a>
-
 
           <a href="#offers">
             Offers
@@ -121,11 +202,14 @@ function Home({
         </div>
 
 
-        {/* ================= AUTH BUTTONS ================= */}
+        {/* =================================================
+            AUTH / SETTINGS
+        ================================================= */}
 
         <div className="auth-buttons">
 
           {!isLoggedIn ? (
+
             <>
               <button
                 type="button"
@@ -142,16 +226,90 @@ function Home({
               >
                 Register
               </button>
+
+              <button
+                type="button"
+                className="login-btn"
+                onClick={onAdminLogin}
+              >
+                Admin Login
+              </button>
             </>
+
           ) : (
 
-            <button
-              type="button"
-              className="login-btn"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+            <div className="settings-menu">
+
+              {/* SETTINGS BUTTON */}
+
+              <button
+                type="button"
+                className="settings-btn"
+                onClick={handleSettingsClick}
+              >
+                <span>
+                  Settings
+                </span>
+
+                <span
+                  className={`settings-main-arrow ${
+                    showSettings ? "open" : ""
+                  }`}
+                >
+                  ▾
+                </span>
+              </button>
+
+
+              {/* SETTINGS DROPDOWN */}
+
+              {showSettings && (
+
+                <div className="settings-dropdown">
+
+                  {/* ACCOUNT */}
+
+                  <button
+                    type="button"
+                    className="settings-dropdown-item"
+                    onClick={handleAccountClick}
+                  >
+                    <span>
+                      Account
+                    </span>
+                  </button>
+
+
+                  {/* MY BOOKINGS */}
+
+                  <button
+                    type="button"
+                    className="settings-dropdown-item"
+                    onClick={handleMyBookings}
+                  >
+                    <span>
+                      My Bookings
+                    </span>
+                  </button>
+
+
+                  {/* LOGOUT */}
+
+                  <button
+                    type="button"
+                    className="settings-dropdown-item logout-item"
+                    onClick={handleLogout}
+                  >
+                    <span>
+                      Logout
+                    </span>
+                  </button>
+
+                </div>
+
+              )}
+
+            </div>
 
           )}
 
@@ -160,13 +318,13 @@ function Home({
       </nav>
 
 
-      {/* ================= HERO ================= */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
       <section className="hero">
 
         <div className="hero-content">
-
-          {/* ================= LEFT ================= */}
 
           <div className="hero-left">
 
@@ -174,31 +332,21 @@ function Home({
               IPL & WPL
             </div>
 
-
             <h1>
-
               LIVE THE
               <br />
-
               <span>
                 THRILL
               </span>
-
             </h1>
 
-
             <p className="hero-description">
-
               Book your favorite match tickets,
               <br />
-
               choose the best seats,
               <br />
-
               enjoy the game!
-
             </p>
-
 
             <div className="hero-buttons">
 
@@ -209,7 +357,6 @@ function Home({
               >
                 Explore Matches
               </button>
-
 
               <button
                 type="button"
@@ -224,12 +371,11 @@ function Home({
           </div>
 
 
-          {/* ================= RIGHT ================= */}
+          {/* HERO RIGHT */}
 
           <div className="hero-right">
 
             <div className="stadium-glow"></div>
-
 
             <img
               src="/cricfusion-logo-transparent.png"
@@ -244,7 +390,9 @@ function Home({
       </section>
 
 
-      {/* ================= FEATURES ================= */}
+      {/* =====================================================
+          FEATURES
+      ===================================================== */}
 
       <section className="features">
 
@@ -335,12 +483,13 @@ function Home({
       </section>
 
 
-      {/* ================= BOTTOM ================= */}
+      {/* =====================================================
+          BOTTOM TEXT
+      ===================================================== */}
 
       <div className="bottom-text">
 
-        Your Match. Your Seat.
-        {" "}
+        Your Match. Your Seat.{" "}
 
         <span>
           Our Fusion.
@@ -349,30 +498,26 @@ function Home({
       </div>
 
 
-      {/* ================= HOW IT WORKS POPUP ================= */}
+      {/* =====================================================
+          HOW IT WORKS MODAL
+      ===================================================== */}
 
       {showHowItWorks && (
 
         <div
           className="how-overlay"
-          onClick={() =>
-            setShowHowItWorks(false)
-          }
+          onClick={() => setShowHowItWorks(false)}
         >
 
           <div
             className="how-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(event) => event.stopPropagation()}
           >
 
             <button
               type="button"
               className="how-close"
-              onClick={() =>
-                setShowHowItWorks(false)
-              }
+              onClick={() => setShowHowItWorks(false)}
             >
               ×
             </button>
@@ -381,7 +526,6 @@ function Home({
             <h2>
               How It Works
             </h2>
-
 
             <p className="how-subtitle">
               Book your IPL or WPL match ticket in a few simple steps.
@@ -403,8 +547,7 @@ function Home({
                   </h3>
 
                   <p>
-                    Browse upcoming IPL and WPL matches and select
-                    your favorite match.
+                    Browse upcoming IPL and WPL matches and select your favorite match.
                   </p>
 
                 </div>
@@ -425,8 +568,7 @@ function Home({
                   </h3>
 
                   <p>
-                    View the stadium seating map and select your
-                    preferred available seats.
+                    View the stadium seating map and select your preferred available seats.
                   </p>
 
                 </div>
@@ -447,8 +589,7 @@ function Home({
                   </h3>
 
                   <p>
-                    Choose a parking slot for your vehicle or skip
-                    parking when you don't need it.
+                    Choose a parking slot for your vehicle or skip parking when you don't need it.
                   </p>
 
                 </div>
@@ -469,8 +610,7 @@ function Home({
                   </h3>
 
                   <p>
-                    Complete the demo payment process and confirm
-                    your booking.
+                    Complete the payment process and confirm your booking.
                   </p>
 
                 </div>
@@ -491,8 +631,7 @@ function Home({
                   </h3>
 
                   <p>
-                    Your booking confirmation and digital ticket
-                    are generated instantly.
+                    Your booking confirmation and digital ticket are generated instantly.
                   </p>
 
                 </div>
@@ -505,12 +644,174 @@ function Home({
             <button
               type="button"
               className="how-done-btn"
-              onClick={() =>
-                setShowHowItWorks(false)
-              }
+              onClick={() => setShowHowItWorks(false)}
             >
               Got It
             </button>
+
+          </div>
+
+        </div>
+
+      )}
+
+
+      {/* =====================================================
+          ACCOUNT POPUP
+      ===================================================== */}
+
+      {showAccount && (
+
+        <div
+          className="account-overlay"
+          onClick={() => setShowAccount(false)}
+        >
+
+          <div
+            className="account-popup"
+            onClick={(event) => event.stopPropagation()}
+          >
+
+            <button
+              type="button"
+              className="account-close"
+              onClick={() => setShowAccount(false)}
+            >
+              ×
+            </button>
+
+
+            <div className="account-profile-icon">
+              {user?.name
+                ? user.name.charAt(0).toUpperCase()
+                : "U"}
+            </div>
+
+
+            <h2>
+              Account
+            </h2>
+
+
+            <p className="account-subtitle">
+              Your CricFusion account
+            </p>
+
+
+            {!isEditingAccount ? (
+
+              <>
+                <div className="account-info">
+
+                  <div className="account-info-row">
+
+                    <span>
+                      Name
+                    </span>
+
+                    <strong>
+                      {user?.name || "User"}
+                    </strong>
+
+                  </div>
+
+
+                  <div className="account-info-row">
+
+                    <span>
+                      Email
+                    </span>
+
+                    <strong>
+                      {user?.email || "Not available"}
+                    </strong>
+
+                  </div>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  className="account-edit-btn"
+                  onClick={handleEditAccount}
+                >
+                  Edit Profile
+                </button>
+
+
+                <button
+                  type="button"
+                  className="account-close-btn"
+                  onClick={() => setShowAccount(false)}
+                >
+                  Close
+                </button>
+              </>
+
+            ) : (
+
+              <div className="account-edit-form">
+
+                <div className="account-edit-field">
+
+                  <label>
+                    Name
+                  </label>
+
+                  <input
+                    type="text"
+                    value={editName}
+                    onChange={(event) =>
+                      setEditName(event.target.value)
+                    }
+                    placeholder="Enter your name"
+                  />
+
+                </div>
+
+
+                <div className="account-edit-field">
+
+                  <label>
+                    Email
+                  </label>
+
+                  <input
+                    type="email"
+                    value={editEmail}
+                    onChange={(event) =>
+                      setEditEmail(event.target.value)
+                    }
+                    placeholder="Enter your email"
+                  />
+
+                </div>
+
+
+                <div className="account-edit-actions">
+
+                  <button
+                    type="button"
+                    className="account-save-btn"
+                    onClick={handleSaveAccount}
+                  >
+                    Save Changes
+                  </button>
+
+                  <button
+                    type="button"
+                    className="account-cancel-btn"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </button>
+
+                </div>
+
+              </div>
+
+            )}
 
           </div>
 

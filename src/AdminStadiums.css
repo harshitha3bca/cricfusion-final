@@ -1,0 +1,645 @@
+/* =====================================================
+   CRICFUSION - ADMIN STADIUMS
+   BLACK + PURPLE + WHITE
+===================================================== */
+
+.admin-stadiums-page {
+  width: 100%;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-stadiums-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.admin-stadiums-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #a855f7;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-stadiums-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.admin-stadiums-header p {
+  margin: 7px 0 0;
+  color: #a9a9b5;
+  font-size: 14px;
+}
+
+.admin-stadiums-add-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-stadiums-add-button:hover {
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.admin-stadiums-error,
+.admin-stadiums-success {
+  margin-bottom: 20px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-stadiums-error {
+  border: 1px solid rgba(
+    239,
+    68,
+    68,
+    0.3
+  );
+  background: rgba(
+    239,
+    68,
+    68,
+    0.1
+  );
+  color: #fca5a5;
+}
+
+.admin-stadiums-success {
+  border: 1px solid rgba(
+    34,
+    197,
+    94,
+    0.3
+  );
+  background: rgba(
+    34,
+    197,
+    94,
+    0.1
+  );
+  color: #86efac;
+}
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.admin-stadium-form-card,
+.admin-stadiums-card {
+  border: 1px solid rgba(
+    168,
+    85,
+    247,
+    0.16
+  );
+  border-radius: 16px;
+  background: rgba(
+    20,
+    20,
+    28,
+    0.9
+  );
+  box-shadow:
+    0 18px 45px rgba(
+      0,
+      0,
+      0,
+      0.25
+    );
+}
+
+.admin-stadium-form-card {
+  margin-bottom: 24px;
+  padding: 24px;
+}
+
+.admin-stadium-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.admin-stadium-form-heading span {
+  color: #a855f7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-stadium-form-heading h3 {
+  margin: 6px 0 0;
+  color: #ffffff;
+  font-size: 21px;
+}
+
+.admin-stadium-close-button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.1
+  );
+  border-radius: 8px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.04
+  );
+  color: #ffffff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.admin-stadium-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-stadium-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-stadium-full-width {
+  grid-column: 1 / -1;
+}
+
+.admin-stadium-input-group label {
+  color: #dedee7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-stadium-input-group input,
+.admin-stadium-input-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.1
+  );
+  border-radius: 9px;
+  outline: none;
+  background: #111118;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 12px 13px;
+  transition: 0.2s ease;
+}
+
+.admin-stadium-input-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.admin-stadium-input-group input::placeholder,
+.admin-stadium-input-group textarea::placeholder {
+  color: #666675;
+}
+
+.admin-stadium-input-group input:focus,
+.admin-stadium-input-group textarea:focus {
+  border-color: #a855f7;
+  box-shadow:
+    0 0 0 3px rgba(
+      168,
+      85,
+      247,
+      0.1
+    );
+}
+
+.admin-stadium-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.admin-stadium-cancel-button,
+.admin-stadium-save-button {
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-stadium-cancel-button {
+  border: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.1
+  );
+  background: transparent;
+  color: #ccccd5;
+}
+
+.admin-stadium-save-button {
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+  );
+  color: #ffffff;
+}
+
+.admin-stadium-save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   CARD HEADING
+===================================================== */
+
+.admin-stadiums-card {
+  overflow: hidden;
+}
+
+.admin-stadiums-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px;
+  border-bottom: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.07
+  );
+}
+
+.admin-stadiums-card-heading span {
+  color: #a855f7;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-stadiums-card-heading h3 {
+  margin: 6px 0 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.admin-stadium-count {
+  border: 1px solid rgba(
+    168,
+    85,
+    247,
+    0.25
+  );
+  border-radius: 20px;
+  padding: 8px 13px;
+  background: rgba(
+    168,
+    85,
+    247,
+    0.08
+  );
+  color: #c084fc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   STATES
+===================================================== */
+
+.admin-stadiums-loading,
+.admin-stadiums-empty {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.admin-stadiums-loading {
+  color: #a9a9b5;
+  font-size: 14px;
+}
+
+.admin-stadiums-empty > div {
+  margin-bottom: 12px;
+  font-size: 40px;
+}
+
+.admin-stadiums-empty h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-stadiums-empty p {
+  margin: 8px 0 0;
+  color: #8e8e9c;
+  font-size: 13px;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.admin-stadiums-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-stadiums-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+}
+
+.admin-stadiums-table th {
+  padding: 14px 20px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.025
+  );
+  color: #888895;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.admin-stadiums-table td {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(
+    255,
+    255,
+    255,
+    0.055
+  );
+  color: #d8d8e0;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.admin-stadiums-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-stadiums-table tbody tr:hover {
+  background: rgba(
+    168,
+    85,
+    247,
+    0.035
+  );
+}
+
+/* =====================================================
+   STADIUM CELL
+===================================================== */
+
+.admin-stadium-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 250px;
+}
+
+.admin-stadium-image {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(
+    168,
+    85,
+    247,
+    0.2
+  );
+  border-radius: 10px;
+  background: #111118;
+}
+
+.admin-stadium-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-stadium-image span {
+  font-size: 25px;
+}
+
+.admin-stadium-name-cell strong {
+  display: block;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-stadium-name-cell small {
+  display: block;
+  margin-top: 4px;
+  color: #777784;
+  font-size: 11px;
+}
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.admin-stadium-location {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 230px;
+}
+
+.admin-stadium-location strong {
+  color: #dedee7;
+  font-size: 12px;
+}
+
+.admin-stadium-location span {
+  overflow: hidden;
+  color: #777784;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   CAPACITY
+===================================================== */
+
+.admin-stadium-capacity {
+  color: #c084fc;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   IMAGE STATUS
+===================================================== */
+
+.admin-stadium-image-status {
+  color: #86efac;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-stadium-image-status:empty {
+  color: #777784;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.admin-stadium-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-stadium-edit-button,
+.admin-stadium-delete-button {
+  border-radius: 7px;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-stadium-edit-button {
+  border: 1px solid rgba(
+    168,
+    85,
+    247,
+    0.25
+  );
+  background: rgba(
+    168,
+    85,
+    247,
+    0.08
+  );
+  color: #c084fc;
+}
+
+.admin-stadium-delete-button {
+  border: 1px solid rgba(
+    239,
+    68,
+    68,
+    0.2
+  );
+  background: rgba(
+    239,
+    68,
+    68,
+    0.07
+  );
+  color: #fca5a5;
+}
+
+.admin-stadium-edit-button:hover {
+  background: rgba(
+    168,
+    85,
+    247,
+    0.15
+  );
+}
+
+.admin-stadium-delete-button:hover {
+  background: rgba(
+    239,
+    68,
+    68,
+    0.13
+  );
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+  .admin-stadiums-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-stadium-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stadium-full-width {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-stadium-form-card {
+    padding: 18px;
+  }
+
+  .admin-stadiums-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-stadium-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .admin-stadium-cancel-button,
+  .admin-stadium-save-button {
+    width: 100%;
+  }
+}

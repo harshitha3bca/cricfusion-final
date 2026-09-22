@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 // ========================================
 // ROUTES
 // ========================================
-
+const adminRoutes = require("./routes/adminRoutes");
 const authRoutes = require("./routes/authRoutes");
 const tournamentRoutes = require("./routes/tournamentRoutes");
 const teamRoutes = require("./routes/teamRoutes");
@@ -28,7 +28,9 @@ dotenv.config();
 // DATABASE
 // ========================================
 
-connectDB();
+connectDB().then((connection) => {
+  app.locals.db = connection.db;
+});
 
 // ========================================
 // EXPRESS APP
@@ -69,6 +71,10 @@ app.use("/api/auth", authRoutes);
 app.use(
   "/api/tournaments",
   tournamentRoutes
+);
+app.use(
+  "/api/admin",
+  adminRoutes
 );
 
 app.use("/api/teams", teamRoutes);

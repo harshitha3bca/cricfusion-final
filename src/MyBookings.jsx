@@ -10,7 +10,7 @@ const API_URL =
   "http://localhost:5000/api";
 
 function MyBookings({
-  onBackToHome,
+  onHome,
   onViewTicket,
 }) {
   /* =====================================================
@@ -36,9 +36,7 @@ function MyBookings({
       setError("");
 
       const token =
-        localStorage.getItem(
-          "token"
-        );
+        localStorage.getItem("token");
 
       if (!token) {
         setError(
@@ -114,29 +112,52 @@ function MyBookings({
   }, []);
 
   /* =====================================================
-     MATCH NAME
+     TEAM NAME
   ===================================================== */
 
-  const getTeamName = (
-    team
-  ) => {
+  const getTeamName = (team) => {
     if (!team) {
       return "";
     }
 
+    /*
+      If backend has populated the team:
+      {
+        _id: "...",
+        name: "Royal Challengers Bengaluru"
+      }
+    */
+
     if (
-      typeof team ===
-      "string"
+      typeof team === "object"
+    ) {
+      return (
+        team?.name ||
+        team?.teamName ||
+        team?.shortName ||
+        team?.displayName ||
+        team?.title ||
+        ""
+      );
+    }
+
+    /*
+      If backend sends a string,
+      return it as it is.
+    */
+
+    if (
+      typeof team === "string"
     ) {
       return team;
     }
 
-    return (
-      team?.name ||
-      team?.shortName ||
-      ""
-    );
+    return "";
   };
+
+  /* =====================================================
+     MATCH NAME
+  ===================================================== */
 
   const getMatchName = (
     booking
@@ -148,14 +169,24 @@ function MyBookings({
       getTeamName(
         match?.teamA
       ) ||
-      match?.team1 ||
+      getTeamName(
+        match?.team1
+      ) ||
+      getTeamName(
+        match?.homeTeam
+      ) ||
       "Team A";
 
     const teamB =
       getTeamName(
         match?.teamB
       ) ||
-      match?.team2 ||
+      getTeamName(
+        match?.team2
+      ) ||
+      getTeamName(
+        match?.awayTeam
+      ) ||
       "Team B";
 
     return `${teamA} vs ${teamB}`;
@@ -179,8 +210,21 @@ function MyBookings({
       return stadium;
     }
 
+    if (
+      typeof stadium ===
+      "object" &&
+      stadium !== null
+    ) {
+      return (
+        stadium?.name ||
+        stadium?.stadiumName ||
+        stadium?.title ||
+        "Stadium"
+      );
+    }
+
     return (
-      stadium?.name ||
+      booking?.stadiumName ||
       "Stadium"
     );
   };
@@ -196,9 +240,18 @@ function MyBookings({
       return "Date unavailable";
     }
 
-    return new Date(
-      date
-    ).toLocaleDateString(
+    const parsedDate =
+      new Date(date);
+
+    if (
+      Number.isNaN(
+        parsedDate.getTime()
+      )
+    ) {
+      return "Date unavailable";
+    }
+
+    return parsedDate.toLocaleDateString(
       "en-IN",
       {
         day: "2-digit",
@@ -215,9 +268,13 @@ function MyBookings({
   const getTime = (
     booking
   ) => {
+    const match =
+      booking?.match || {};
+
     return (
-      booking?.match
-        ?.startTime ||
+      match?.startTime ||
+      match?.time ||
+      booking?.startTime ||
       "7:30 PM"
     );
   };
@@ -241,10 +298,21 @@ function MyBookings({
       (
         seat,
         index
-      ) =>
-        seat?.seatNumber ||
-        seat?.label ||
-        `Seat ${index + 1}`
+      ) => {
+        if (
+          typeof seat ===
+          "string"
+        ) {
+          return seat;
+        }
+
+        return (
+          seat?.seatNumber ||
+          seat?.label ||
+          seat?.name ||
+          `Seat ${index + 1}`
+        );
+      }
     );
   };
 
@@ -262,11 +330,39 @@ function MyBookings({
       return null;
     }
 
+    if (
+      typeof parking ===
+      "string"
+    ) {
+      return parking;
+    }
+
     return (
       parking?.slotNumber ||
       parking?.number ||
       parking?.name ||
       "Parking"
+    );
+  };
+
+  /* =====================================================
+     PARKING VEHICLE TYPE
+  ===================================================== */
+
+  const getParkingVehicleType = (
+    booking
+  ) => {
+    const parking =
+      booking?.parkingSlot;
+
+    if (!parking) {
+      return "";
+    }
+
+    return (
+      parking?.vehicleType ||
+      parking?.type ||
+      ""
     );
   };
 
@@ -332,9 +428,7 @@ function MyBookings({
         <button
           type="button"
           className="my-bookings-back"
-          onClick={
-            onBackToHome
-          }
+          onClick={onHome}
         >
           ← Home
         </button>
@@ -385,7 +479,9 @@ function MyBookings({
 
       <main className="my-bookings-container">
 
-        {/* LOADING */}
+        {/* =================================================
+            LOADING
+        ================================================= */}
 
         {loading && (
 
@@ -406,7 +502,9 @@ function MyBookings({
 
         )}
 
-        {/* ERROR */}
+        {/* =================================================
+            ERROR
+        ================================================= */}
 
         {!loading &&
           error && (
@@ -438,7 +536,9 @@ function MyBookings({
 
           )}
 
-        {/* EMPTY */}
+        {/* =================================================
+            EMPTY
+        ================================================= */}
 
         {!loading &&
           !error &&
@@ -464,7 +564,9 @@ function MyBookings({
 
           )}
 
-        {/* BOOKINGS */}
+        {/* =================================================
+            BOOKINGS
+        ================================================= */}
 
         {!loading &&
           !error &&
@@ -490,6 +592,11 @@ function MyBookings({
 
                   const parkingName =
                     getParkingName(
+                      booking
+                    );
+
+                  const parkingVehicleType =
+                    getParkingVehicleType(
                       booking
                     );
 
@@ -660,22 +767,17 @@ function MyBookings({
 
                         </div>
 
-                        {booking?.parkingSlot
-                          ?.vehicleType && (
+                        {parkingVehicleType && (
 
                           <small>
 
                             {String(
-                              booking
-                                .parkingSlot
-                                .vehicleType
+                              parkingVehicleType
                             )
                               .charAt(0)
                               .toUpperCase() +
                               String(
-                                booking
-                                  .parkingSlot
-                                  .vehicleType
+                                parkingVehicleType
                               ).slice(1)}
 
                           </small>

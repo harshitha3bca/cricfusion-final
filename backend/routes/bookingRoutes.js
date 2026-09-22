@@ -1,4 +1,3 @@
-
 const express = require("express");
 
 const {
@@ -8,6 +7,7 @@ const {
   getBookingById,
   cancelBooking,
   getAllBookings,
+  getPublicTicketByReference,
 } = require("../controllers/bookingController");
 
 const {
@@ -15,13 +15,12 @@ const {
   adminOnly,
 } = require("../middleware/authMiddleware");
 
-const router = express.Router();
+const router =
+  express.Router();
 
-// ========================================
-// USER BOOKING ROUTES
-// ========================================
-
-// Create booking
+/* =====================================================
+   CREATE BOOKING
+===================================================== */
 
 router.post(
   "/",
@@ -29,7 +28,9 @@ router.post(
   createBooking
 );
 
-// Confirm booking after demo payment
+/* =====================================================
+   CONFIRM BOOKING
+===================================================== */
 
 router.put(
   "/:id/confirm",
@@ -37,7 +38,9 @@ router.put(
   confirmBooking
 );
 
-// Get logged-in user's bookings
+/* =====================================================
+   MY BOOKINGS
+===================================================== */
 
 router.get(
   "/my",
@@ -45,7 +48,21 @@ router.get(
   getMyBookings
 );
 
-// Get one booking
+/* =====================================================
+   PUBLIC QR TICKET
+
+   IMPORTANT:
+   This route MUST come before /:id
+===================================================== */
+
+router.get(
+  "/ticket/:bookingReference",
+  getPublicTicketByReference
+);
+
+/* =====================================================
+   SINGLE BOOKING
+===================================================== */
 
 router.get(
   "/:id",
@@ -53,7 +70,9 @@ router.get(
   getBookingById
 );
 
-// Cancel booking
+/* =====================================================
+   CANCEL BOOKING
+===================================================== */
 
 router.put(
   "/:id/cancel",
@@ -61,11 +80,9 @@ router.put(
   cancelBooking
 );
 
-// ========================================
-// ADMIN BOOKING ROUTES
-// ========================================
-
-// Get all bookings
+/* =====================================================
+   ADMIN BOOKINGS
+===================================================== */
 
 router.get(
   "/admin/all",
@@ -74,4 +91,5 @@ router.get(
   getAllBookings
 );
 
-module.exports = router;
+module.exports =
+  router;

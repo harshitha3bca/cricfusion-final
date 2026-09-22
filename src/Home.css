@@ -1,3 +1,4 @@
+
 /* =====================================================
    CRICFUSION HOME PAGE
 ===================================================== */
@@ -61,7 +62,9 @@
 }
 
 
-/* LOGO LEFT */
+/* =====================================================
+   LOGO
+===================================================== */
 
 .home-page .logo-section {
   width: 210px;
@@ -99,7 +102,9 @@
 }
 
 
-/* NAVIGATION */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 .home-page .nav-links {
   flex: 1;
@@ -130,7 +135,9 @@
 }
 
 
-/* LOGIN / REGISTER */
+/* =====================================================
+   AUTH BUTTONS
+===================================================== */
 
 .home-page .auth-buttons {
   width: 210px;
@@ -185,6 +192,176 @@
 
 
 /* =====================================================
+   SETTINGS MENU
+===================================================== */
+
+.home-page .settings-menu {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* =====================================================
+   SETTINGS BUTTON
+===================================================== */
+
+.home-page .settings-btn {
+  height: 38px;
+
+  padding: 0 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border-radius: 6px;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid #6845c8;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.home-page .settings-btn:hover {
+  background: rgba(105, 53, 210, 0.14);
+
+  border-color: #8b5cf6;
+
+  box-shadow:
+    0 0 15px rgba(105, 45, 230, 0.18);
+}
+
+.home-page .settings-main-arrow {
+  color: #a46cff;
+
+  font-size: 12px;
+
+  transition: transform 0.2s ease;
+}
+
+.home-page .settings-main-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   SETTINGS DROPDOWN
+===================================================== */
+
+.home-page .settings-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+
+  right: 0;
+
+  width: 205px;
+
+  padding: 7px;
+
+  background: #020711;
+
+  border: 1px solid rgba(116, 85, 200, 0.45);
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.55),
+    0 0 20px rgba(105, 45, 230, 0.12);
+
+  z-index: 9999;
+
+  animation: settingsDropdownOpen 0.16s ease-out;
+}
+
+@keyframes settingsDropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   SETTINGS DROPDOWN ITEMS
+===================================================== */
+
+.home-page .settings-dropdown-item {
+  width: 100%;
+
+  min-height: 43px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #cbd1df;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.home-page .settings-dropdown-item:hover {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(90, 37, 217, 0.25),
+      rgba(145, 52, 239, 0.12)
+    );
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.home-page .settings-dropdown-item.logout-item {
+  color: #ff8d9b;
+}
+
+.home-page .settings-dropdown-item.logout-item:hover {
+  color: #ffb2bc;
+
+  background: rgba(220, 38, 72, 0.10);
+}
+
+
+/* =====================================================
    HERO
 ===================================================== */
 
@@ -204,9 +381,6 @@
 
   overflow: hidden;
 }
-
-
-/* RIGHT SIDE BLUE LIGHT */
 
 .home-page .hero::after {
   content: "";
@@ -260,7 +434,7 @@
 
 
 /* =====================================================
-   LEFT SIDE
+   HERO LEFT
 ===================================================== */
 
 .home-page .hero-left {
@@ -278,11 +452,9 @@
   text-align: left;
 
   position: relative;
+
   z-index: 10;
 }
-
-
-/* SMALL IPL TITLE */
 
 .home-page .small-title {
   margin-bottom: 14px;
@@ -295,9 +467,6 @@
 
   letter-spacing: 4px;
 }
-
-
-/* MAIN TITLE */
 
 .home-page .hero-left h1 {
   margin: 0;
@@ -322,13 +491,11 @@
   );
 
   -webkit-background-clip: text;
+
   background-clip: text;
 
   -webkit-text-fill-color: transparent;
 }
-
-
-/* DESCRIPTION */
 
 .home-page .hero-description {
   margin: 25px 0 0 0;
@@ -344,7 +511,7 @@
 
 
 /* =====================================================
-   BUTTONS
+   HERO BUTTONS
 ===================================================== */
 
 .home-page .hero-buttons {
@@ -399,7 +566,7 @@
 
 
 /* =====================================================
-   RIGHT SIDE
+   HERO RIGHT
 ===================================================== */
 
 .home-page .hero-right {
@@ -419,9 +586,6 @@
 
   z-index: 5;
 }
-
-
-/* LOGO GLOW */
 
 .home-page .stadium-glow {
   position: absolute;
@@ -444,13 +608,9 @@
   z-index: 1;
 }
 
-
-/* =====================================================
-   CRICFUSION LOGO
-===================================================== */
-
 .home-page .hero-logo {
   width: 430px;
+
   height: 430px;
 
   max-width: 100%;
@@ -479,6 +639,7 @@
 
 .home-page .features {
   width: 100%;
+
   max-width: 1200px;
 
   margin: -5px auto 0;
@@ -518,6 +679,7 @@
 
 .home-page .feature-icon {
   width: 35px;
+
   height: 35px;
 
   margin: 0 auto 10px;
@@ -525,6 +687,7 @@
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 7px;
@@ -583,7 +746,572 @@
 
 
 /* =====================================================
-   RESPONSIVE
+   HOW IT WORKS MODAL
+===================================================== */
+
+.home-page .how-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(6px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 9999;
+
+  padding: 20px;
+}
+
+.home-page .how-modal {
+  position: relative;
+
+  width: min(620px, 95vw);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #111116;
+
+  border: 1px solid rgba(124, 58, 237, 0.55);
+
+  border-radius: 22px;
+
+  padding: 35px;
+
+  box-shadow:
+    0 0 50px rgba(124, 58, 237, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+
+  color: white;
+}
+
+.home-page .how-close {
+  position: absolute;
+
+  top: 14px;
+
+  right: 18px;
+
+  width: 38px;
+
+  height: 38px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-size: 26px;
+
+  cursor: pointer;
+}
+
+.home-page .how-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.home-page .how-modal h2 {
+  margin: 0;
+
+  text-align: center;
+
+  font-size: 32px;
+
+  font-weight: 800;
+}
+
+.home-page .how-subtitle {
+  margin: 10px auto 28px;
+
+  max-width: 480px;
+
+  text-align: center;
+
+  color: #b7b7c7;
+
+  line-height: 1.6;
+}
+
+.home-page .how-steps {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.home-page .how-step {
+  display: flex;
+
+  gap: 16px;
+
+  align-items: flex-start;
+
+  padding: 15px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  transition: 0.2s;
+}
+
+.home-page .how-step:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.home-page .step-number {
+  min-width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #7c3aed;
+
+  color: white;
+
+  font-weight: 800;
+}
+
+.home-page .how-step h3 {
+  margin: 0 0 5px;
+
+  font-size: 17px;
+}
+
+.home-page .how-step p {
+  margin: 0;
+
+  color: #aaaabb;
+
+  line-height: 1.5;
+
+  font-size: 14px;
+}
+
+.home-page .how-done-btn {
+  display: block;
+
+  margin: 28px auto 0;
+
+  padding: 11px 30px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #7c3aed;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.home-page .how-done-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =====================================================
+   ACCOUNT POPUP
+===================================================== */
+
+.home-page .account-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(6px);
+}
+
+.home-page .account-popup {
+  position: relative;
+
+  width: min(430px, 95vw);
+
+  padding: 35px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111522,
+      #070a12
+    );
+
+  border: 1px solid rgba(124, 58, 237, 0.5);
+
+  border-radius: 18px;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(124, 58, 237, 0.2);
+
+  animation: accountPopupOpen 0.2s ease-out;
+}
+
+@keyframes accountPopupOpen {
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.96)
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+}
+
+.home-page .account-profile-icon {
+  width: 65px;
+
+  height: 65px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #5923d5,
+      #9439ee
+    );
+
+  color: #ffffff;
+
+  font-size: 26px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 0 25px rgba(124, 58, 237, 0.35);
+}
+
+.home-page .account-popup h2 {
+  margin: 0;
+
+  font-size: 26px;
+}
+
+.home-page .account-subtitle {
+  margin: 7px 0 25px;
+
+  color: #9299aa;
+
+  font-size: 13px;
+}
+
+.home-page .account-info {
+  text-align: left;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.home-page .account-info-row {
+  min-height: 58px;
+
+  padding: 0 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-page .account-info-row:last-child {
+  border-bottom: none;
+}
+
+.home-page .account-info-row span {
+  color: #8e96a9;
+
+  font-size: 12px;
+}
+
+.home-page .account-info-row strong {
+  max-width: 65%;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  text-align: right;
+
+  overflow-wrap: anywhere;
+}
+
+.home-page .account-close {
+  position: absolute;
+
+  top: 13px;
+
+  right: 15px;
+
+  width: 34px;
+
+  height: 34px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+.home-page .account-close:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.home-page .account-close-btn {
+  margin-top: 22px;
+
+  padding: 10px 28px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5722d8,
+      #8b30ed
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.home-page .account-close-btn:hover {
+  box-shadow:
+    0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+
+/* =====================================================
+   ACCOUNT EDIT PROFILE
+===================================================== */
+
+.account-edit-btn {
+  width: 100%;
+
+  margin-top: 18px;
+
+  padding: 12px 18px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #7c3aed;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.account-edit-btn:hover {
+  background: #6d28d9;
+}
+
+.account-edit-form {
+  width: 100%;
+
+  margin-top: 18px;
+}
+
+.account-edit-field {
+  width: 100%;
+
+  margin-bottom: 15px;
+}
+
+.account-edit-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-align: left;
+}
+
+.account-edit-field input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #ffffff;
+
+  outline: none;
+
+  font-size: 14px;
+
+  font-family: inherit;
+}
+
+.account-edit-field input:focus {
+  border-color: #7c3aed;
+
+  box-shadow:
+    0 0 0 2px rgba(124, 58, 237, 0.12);
+}
+
+.account-edit-field input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.account-edit-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.account-save-btn,
+.account-cancel-btn {
+  flex: 1;
+
+  padding: 11px 14px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  font-family: inherit;
+}
+
+.account-save-btn {
+  border: none;
+
+  background: #7c3aed;
+
+  color: #ffffff;
+}
+
+.account-save-btn:hover {
+  background: #6d28d9;
+}
+
+.account-cancel-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  background: transparent;
+
+  color: #ffffff;
+}
+
+.account-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
 ===================================================== */
 
 @media (max-width: 1100px) {
@@ -611,6 +1339,7 @@
 
   .home-page .hero-logo {
     width: 370px;
+
     height: 370px;
   }
 
@@ -621,7 +1350,7 @@
 
 
 /* =====================================================
-   MOBILE
+   RESPONSIVE - MOBILE
 ===================================================== */
 
 @media (max-width: 750px) {
@@ -658,6 +1387,16 @@
     padding: 5px 0 8px;
 
     gap: 22px;
+  }
+
+  .home-page .settings-btn {
+    padding: 0 12px;
+  }
+
+  .home-page .settings-dropdown {
+    right: 0;
+
+    width: 200px;
   }
 
   .home-page .hero-content {
@@ -702,6 +1441,7 @@
 
   .home-page .hero-logo {
     width: 300px;
+
     height: 300px;
   }
 
@@ -710,168 +1450,8 @@
 
     padding: 0 15px;
   }
+
+  .home-page .account-popup {
+    padding: 30px 22px;
+  }
 }
-/* ================= HOW IT WORKS MODAL ================= */
-
-.how-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(6px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 9999;
-
-  padding: 20px;
-}
-
-.how-modal {
-  position: relative;
-
-  width: min(620px, 95vw);
-  max-height: 90vh;
-
-  overflow-y: auto;
-
-  background: #111116;
-  border: 1px solid rgba(124, 58, 237, 0.55);
-  border-radius: 22px;
-
-  padding: 35px;
-
-  box-shadow:
-    0 0 50px rgba(124, 58, 237, 0.25),
-    0 20px 60px rgba(0, 0, 0, 0.6);
-
-  color: white;
-}
-
-.how-close {
-  position: absolute;
-  top: 14px;
-  right: 18px;
-
-  width: 38px;
-  height: 38px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.08);
-  color: white;
-
-  font-size: 26px;
-  cursor: pointer;
-
-  transition: 0.2s;
-}
-
-.how-close:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.how-modal h2 {
-  margin: 0;
-  text-align: center;
-
-  font-size: 32px;
-  font-weight: 800;
-}
-
-.how-subtitle {
-  margin: 10px auto 28px;
-
-  max-width: 480px;
-
-  text-align: center;
-  color: #b7b7c7;
-  line-height: 1.6;
-}
-
-.how-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.how-step {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-
-  padding: 15px;
-
-  border-radius: 14px;
-
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-
-  transition: 0.2s;
-}
-
-.how-step:hover {
-  transform: translateY(-2px);
-
-  border-color: rgba(124, 58, 237, 0.4);
-}
-
-.step-number {
-  min-width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #7c3aed;
-  color: white;
-
-  font-weight: 800;
-}
-
-.how-step h3 {
-  margin: 0 0 5px;
-
-  font-size: 17px;
-}
-
-.how-step p {
-  margin: 0;
-
-  color: #aaaabb;
-
-  line-height: 1.5;
-  font-size: 14px;
-}
-
-.how-done-btn {
-  display: block;
-
-  margin: 28px auto 0;
-
-  padding: 11px 30px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: #7c3aed;
-  color: white;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-}
-
-.how-done-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
-}
-

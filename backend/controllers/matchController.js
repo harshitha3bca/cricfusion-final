@@ -1,13 +1,28 @@
 const Match = require("../models/Match");
 
-// GET all matches
+// =====================================================
+// GET ALL MATCHES
+// =====================================================
+
 const getMatches = async (req, res) => {
   try {
     const matches = await Match.find()
-      .populate("tournament", "name type season")
-      .populate("teamA", "name shortName logo")
-      .populate("teamB", "name shortName logo")
-      .populate("stadium", "name city state image capacity")
+      .populate(
+        "tournament",
+        "name type season"
+      )
+      .populate(
+        "teamA",
+        "name shortName logo"
+      )
+      .populate(
+        "teamB",
+        "name shortName logo"
+      )
+      .populate(
+        "stadium",
+        "name city state image capacity"
+      )
       .sort({ date: 1 });
 
     res.status(200).json({
@@ -16,7 +31,10 @@ const getMatches = async (req, res) => {
       matches,
     });
   } catch (error) {
-    console.error("Get matches error:", error);
+    console.error(
+      "Get matches error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
@@ -25,14 +43,20 @@ const getMatches = async (req, res) => {
   }
 };
 
-// GET single match
+// =====================================================
+// GET SINGLE MATCH
+// =====================================================
+
 const getMatchById = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id)
-      .populate("tournament")
-      .populate("teamA")
-      .populate("teamB")
-      .populate("stadium");
+    const match =
+      await Match.findById(
+        req.params.id
+      )
+        .populate("tournament")
+        .populate("teamA")
+        .populate("teamB")
+        .populate("stadium");
 
     if (!match) {
       return res.status(404).json({
@@ -46,7 +70,10 @@ const getMatchById = async (req, res) => {
       match,
     });
   } catch (error) {
-    console.error("Get match error:", error);
+    console.error(
+      "Get match error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
@@ -55,7 +82,10 @@ const getMatchById = async (req, res) => {
   }
 };
 
-// CREATE match
+// =====================================================
+// CREATE MATCH
+// =====================================================
+
 const createMatch = async (req, res) => {
   try {
     const {
@@ -67,6 +97,10 @@ const createMatch = async (req, res) => {
       date,
       startTime,
       ticketPrice,
+
+      parkingMode,
+      parkingLocation,
+      parkingInstructions,
     } = req.body;
 
     if (
@@ -80,53 +114,82 @@ const createMatch = async (req, res) => {
     ) {
       return res.status(400).json({
         success: false,
-        message: "Required match details are missing",
+        message:
+          "Required match details are missing",
       });
     }
 
     if (teamA === teamB) {
       return res.status(400).json({
         success: false,
-        message: "A team cannot play against itself",
+        message:
+          "A team cannot play against itself",
       });
     }
 
-    const match = await Match.create({
-      tournament,
-      teamA,
-      teamB,
-      stadium,
-      matchNumber,
-      date,
-      startTime,
-      ticketPrice,
-    });
+    const match =
+      await Match.create({
+        tournament,
+        teamA,
+        teamB,
+        stadium,
+        matchNumber,
+        date,
+        startTime,
+        ticketPrice,
 
-    const populatedMatch = await Match.findById(match._id)
-      .populate("tournament")
-      .populate("teamA")
-      .populate("teamB")
-      .populate("stadium");
+        parkingMode:
+          parkingMode ||
+          "designated",
+
+        parkingLocation:
+          parkingLocation ||
+          "",
+
+        parkingInstructions:
+          parkingInstructions ||
+          "",
+      });
+
+    const populatedMatch =
+      await Match.findById(
+        match._id
+      )
+        .populate("tournament")
+        .populate("teamA")
+        .populate("teamB")
+        .populate("stadium");
 
     res.status(201).json({
       success: true,
-      message: "Match created successfully",
+      message:
+        "Match created successfully",
       match: populatedMatch,
     });
   } catch (error) {
-    console.error("Create match error:", error);
+    console.error(
+      "Create match error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
-      message: "Failed to create match",
+      message:
+        "Failed to create match",
     });
   }
 };
 
-// UPDATE match
+// =====================================================
+// UPDATE MATCH
+// =====================================================
+
 const updateMatch = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id);
+    const match =
+      await Match.findById(
+        req.params.id
+      );
 
     if (!match) {
       return res.status(404).json({
@@ -145,48 +208,76 @@ const updateMatch = async (req, res) => {
       "startTime",
       "ticketPrice",
       "status",
+
+      "parkingMode",
+      "parkingLocation",
+      "parkingInstructions",
     ];
 
-    allowedFields.forEach((field) => {
-      if (req.body[field] !== undefined) {
-        match[field] = req.body[field];
+    allowedFields.forEach(
+      (field) => {
+        if (
+          req.body[field] !==
+          undefined
+        ) {
+          match[field] =
+            req.body[field];
+        }
       }
-    });
+    );
 
-    if (match.teamA.toString() === match.teamB.toString()) {
+    if (
+      match.teamA.toString() ===
+      match.teamB.toString()
+    ) {
       return res.status(400).json({
         success: false,
-        message: "A team cannot play against itself",
+        message:
+          "A team cannot play against itself",
       });
     }
 
     await match.save();
 
-    const updatedMatch = await Match.findById(match._id)
-      .populate("tournament")
-      .populate("teamA")
-      .populate("teamB")
-      .populate("stadium");
+    const updatedMatch =
+      await Match.findById(
+        match._id
+      )
+        .populate("tournament")
+        .populate("teamA")
+        .populate("teamB")
+        .populate("stadium");
 
     res.status(200).json({
       success: true,
-      message: "Match updated successfully",
+      message:
+        "Match updated successfully",
       match: updatedMatch,
     });
   } catch (error) {
-    console.error("Update match error:", error);
+    console.error(
+      "Update match error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
-      message: "Failed to update match",
+      message:
+        "Failed to update match",
     });
   }
 };
 
-// DELETE match
+// =====================================================
+// DELETE MATCH
+// =====================================================
+
 const deleteMatch = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id);
+    const match =
+      await Match.findById(
+        req.params.id
+      );
 
     if (!match) {
       return res.status(404).json({
@@ -199,14 +290,19 @@ const deleteMatch = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Match deleted successfully",
+      message:
+        "Match deleted successfully",
     });
   } catch (error) {
-    console.error("Delete match error:", error);
+    console.error(
+      "Delete match error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
-      message: "Failed to delete match",
+      message:
+        "Failed to delete match",
     });
   }
 };

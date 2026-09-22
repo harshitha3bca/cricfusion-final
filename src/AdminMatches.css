@@ -1,0 +1,592 @@
+/* =====================================================
+   CRICFUSION - ADMIN MATCH MANAGEMENT
+   BLACK + PURPLE + WHITE
+===================================================== */
+
+.admin-matches-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 30px;
+  color: #ffffff;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-matches-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.admin-section-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #b47cff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-matches-header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.admin-matches-header p {
+  margin: 8px 0 0;
+  color: #a7a7b5;
+  font-size: 14px;
+}
+
+/* =====================================================
+   ADD BUTTON
+===================================================== */
+
+.admin-add-match-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 8px 24px rgba(124, 58, 237, 0.25);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-add-match-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 30px rgba(124, 58, 237, 0.35);
+}
+
+.admin-add-match-btn span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.admin-match-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-match-message.error {
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  color: #ff9b9b;
+}
+
+.admin-match-message.success {
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.1);
+  color: #8ff0ae;
+}
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.admin-match-form-card,
+.admin-match-list-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 25, 45, 0.96),
+      rgba(17, 17, 27, 0.98)
+    );
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.admin-match-form-card {
+  padding: 25px;
+}
+
+.admin-form-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.admin-form-title h2 {
+  margin: 0;
+  font-size: 21px;
+  color: #ffffff;
+}
+
+.admin-close-form-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.admin-close-form-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-form-full {
+  grid-column: 1 / -1;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-form-group label {
+  color: #ddddE8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-form-group input,
+.admin-form-group select {
+  width: 100%;
+  height: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  outline: none;
+  padding: 0 13px;
+  background: rgba(8, 8, 15, 0.75);
+  color: #ffffff;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.admin-form-group input::placeholder {
+  color: #666674;
+}
+
+.admin-form-group select {
+  cursor: pointer;
+}
+
+.admin-form-group select option {
+  background: #17131f;
+  color: #ffffff;
+}
+
+.admin-form-group input:focus,
+.admin-form-group select:focus {
+  border-color: #9b5cff;
+  box-shadow:
+    0 0 0 3px rgba(155, 92, 255, 0.12);
+}
+
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
+
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+.admin-cancel-btn,
+.admin-save-match-btn {
+  min-width: 130px;
+  height: 43px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-cancel-btn {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ddddE8;
+}
+
+.admin-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.admin-save-match-btn {
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a855f7
+  );
+  color: #ffffff;
+}
+
+.admin-save-match-btn:hover {
+  box-shadow:
+    0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+.admin-save-match-btn:disabled,
+.admin-cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   LIST CARD
+===================================================== */
+
+.admin-match-list-card {
+  overflow: hidden;
+}
+
+.admin-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+.admin-list-heading h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.admin-list-heading p {
+  margin: 5px 0 0;
+  color: #8f8f9f;
+  font-size: 13px;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.admin-match-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-match-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
+}
+
+.admin-match-table th {
+  padding: 14px 16px;
+  background: rgba(124, 58, 237, 0.08);
+  color: #aaa6b8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-match-table td {
+  padding: 16px;
+  border-top: 1px solid
+    rgba(255, 255, 255, 0.06);
+  color: #ddddE8;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.admin-match-table tbody tr {
+  transition:
+    background 0.2s ease;
+}
+
+.admin-match-table tbody tr:hover {
+  background: rgba(168, 85, 247, 0.045);
+}
+
+/* =====================================================
+   TABLE CONTENT
+===================================================== */
+
+.admin-match-number {
+  color: #b47cff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-tournament-name {
+  max-width: 170px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.admin-teams-cell {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.admin-teams-cell strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-teams-cell span {
+  color: #9b5cff;
+  font-weight: 800;
+}
+
+.admin-stadium-cell,
+.admin-date-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-stadium-cell strong,
+.admin-date-cell strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-stadium-cell small,
+.admin-date-cell small {
+  color: #858594;
+  font-size: 11px;
+}
+
+.admin-price-cell {
+  color: #d6b5ff;
+  white-space: nowrap;
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 78px;
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+}
+
+.admin-status-badge.upcoming {
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  background: rgba(168, 85, 247, 0.12);
+  color: #c9a3ff;
+}
+
+.admin-status-badge.live {
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  color: #ff9999;
+}
+
+.admin-status-badge.completed {
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  background: rgba(34, 197, 94, 0.1);
+  color: #8be9a5;
+}
+
+.admin-status-badge.cancelled {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.08);
+  color: #aeb6c4;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.admin-action-buttons {
+  display: flex;
+  gap: 7px;
+}
+
+.admin-edit-btn,
+.admin-delete-btn {
+  border-radius: 7px;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-edit-btn {
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(168, 85, 247, 0.1);
+  color: #cba8ff;
+}
+
+.admin-edit-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.admin-delete-btn {
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.08);
+  color: #ff9b9b;
+}
+
+.admin-delete-btn:hover {
+  background: rgba(239, 68, 68, 0.16);
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.admin-match-loading {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #9696a5;
+}
+
+.admin-loading-spinner {
+  width: 35px;
+  height: 35px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #a855f7;
+  border-radius: 50%;
+  animation:
+    adminMatchSpin 0.8s linear infinite;
+}
+
+@keyframes adminMatchSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.admin-empty-matches {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.admin-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px;
+  border: 1px solid
+    rgba(168, 85, 247, 0.2);
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.08);
+  font-size: 30px;
+}
+
+.admin-empty-matches h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.admin-empty-matches p {
+  margin: 8px 0 20px;
+  color: #888895;
+  font-size: 13px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+  .admin-matches-page {
+    padding: 20px;
+  }
+
+  .admin-matches-header {
+    flex-direction: column;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form-full {
+    grid-column: auto;
+  }
+
+  .admin-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .admin-cancel-btn,
+  .admin-save-match-btn {
+    width: 100%;
+  }
+}

@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const Seat = require("../models/Seat");
 const Match = require("../models/Match");
@@ -177,16 +178,30 @@ const lockSeats = async (req, res) => {
       });
     }
 
-    // Check availability
+    // ========================================
+    // CHECK AVAILABILITY
+    // ========================================
+
     const unavailableSeats = seats.filter(
-      (seat) =>
-        seat.status !== "available"
-      ||
-        (
+      (seat) => {
+        // Available seats are okay
+        if (seat.status === "available") {
+          return false;
+        }
+
+        // Already locked by current user is okay
+        if (
+          seat.status === "locked" &&
           seat.lockedBy &&
-          seat.lockedBy.toString() !==
+          seat.lockedBy.toString() ===
             req.user._id.toString()
-        )
+        ) {
+          return false;
+        }
+
+        // Booked or locked by another user
+        return true;
+      }
     );
 
     if (unavailableSeats.length > 0) {
@@ -194,62 +209,98 @@ const lockSeats = async (req, res) => {
         success: false,
         message:
           "One or more selected seats are no longer available",
-        unavailableSeats: unavailableSeats.map(
-          (seat) => ({
-            id: seat._id,
-            seatNumber: seat.seatNumber,
-            status: seat.status,
-          })
-        ),
+        unavailableSeats:
+          unavailableSeats.map(
+            (seat) => ({
+              id: seat._id,
+              seatNumber: seat.seatNumber,
+              status: seat.status,
+            })
+          ),
       });
     }
 
-    // Lock for 10 minutes
+    // ========================================
+    // LOCK FOR 10 MINUTES
+    // ========================================
+
     const lockedUntil = new Date(
       Date.now() + 10 * 60 * 1000
     );
 
-    // Atomically lock each seat
     const lockedSeats = [];
 
-    for (const seatId of uniqueSeatIds) {
-      const lockedSeat = await Seat.findOneAndUpdate(
-        {
-          _id: seatId,
-          status: "available",
-        },
-        {
-          $set: {
-            status: "locked",
-            lockedBy: req.user._id,
-            lockedUntil,
-          },
-        },
-        {
-          new: true,
-        }
-      );
+    // ========================================
+    // LOCK EACH SEAT
+    // ========================================
 
-      if (!lockedSeat) {
-        // Release seats already locked in this request
-        await Seat.updateMany(
+    for (
+      const seatId of uniqueSeatIds
+    ) {
+      // Check if already locked by current user
+      const existingLockedSeat =
+        await Seat.findOne({
+          _id: seatId,
+          status: "locked",
+          lockedBy: req.user._id,
+        });
+
+      if (existingLockedSeat) {
+        // Already belongs to this user.
+        // Do not try to lock it again.
+        existingLockedSeat.lockedUntil =
+          lockedUntil;
+
+        await existingLockedSeat.save();
+
+        lockedSeats.push(
+          existingLockedSeat
+        );
+
+        continue;
+      }
+
+      // Lock available seat
+      const lockedSeat =
+        await Seat.findOneAndUpdate(
           {
-            _id: {
-              $in: lockedSeats.map(
-                (seat) => seat._id
-              ),
-            },
-            lockedBy: req.user._id,
-            status: "locked",
+            _id: seatId,
+            status: "available",
           },
           {
             $set: {
-              status: "available",
-              lockedBy: null,
-              lockedUntil: null,
+              status: "locked",
+              lockedBy: req.user._id,
+              lockedUntil,
             },
+          },
+          {
+            new: true,
           }
         );
+
+      if (!lockedSeat) {
+        // Release seats already locked in this request
+        if (lockedSeats.length > 0) {
+          await Seat.updateMany(
+            {
+              _id: {
+                $in: lockedSeats.map(
+                  (seat) => seat._id
+                ),
+              },
+              lockedBy: req.user._id,
+              status: "locked",
+            },
+            {
+              $set: {
+                status: "available",
+                lockedBy: null,
+                lockedUntil: null,
+              },
+            }
+          );
+        }
 
         return res.status(409).json({
           success: false,
@@ -258,8 +309,14 @@ const lockSeats = async (req, res) => {
         });
       }
 
-      lockedSeats.push(lockedSeat);
+      lockedSeats.push(
+        lockedSeat
+      );
     }
+
+    // ========================================
+    // SUCCESS
+    // ========================================
 
     res.status(200).json({
       success: true,
@@ -268,7 +325,10 @@ const lockSeats = async (req, res) => {
       seats: lockedSeats,
     });
   } catch (error) {
-    console.error("Lock seats error:", error);
+    console.error(
+      "Lock seats error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
@@ -318,7 +378,10 @@ const releaseSeats = async (req, res) => {
       releasedCount: result.modifiedCount,
     });
   } catch (error) {
-    console.error("Release seats error:", error);
+    console.error(
+      "Release seats error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
@@ -387,7 +450,10 @@ const createSeat = async (req, res) => {
       seat,
     });
   } catch (error) {
-    console.error("Create seat error:", error);
+    console.error(
+      "Create seat error:",
+      error
+    );
 
     res.status(500).json({
       success: false,
@@ -415,19 +481,21 @@ const createMultipleSeats = async (req, res) => {
       });
     }
 
-    const createdSeats = await Seat.insertMany(
-      seats.map((seat) => ({
-        ...seat,
-        status: "available",
-      })),
-      {
-        ordered: false,
-      }
-    );
+    const createdSeats =
+      await Seat.insertMany(
+        seats.map((seat) => ({
+          ...seat,
+          status: "available",
+        })),
+        {
+          ordered: false,
+        }
+      );
 
     res.status(201).json({
       success: true,
-      message: "Seats created successfully",
+      message:
+        "Seats created successfully",
       count: createdSeats.length,
       seats: createdSeats,
     });

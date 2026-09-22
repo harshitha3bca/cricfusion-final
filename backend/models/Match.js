@@ -49,13 +49,37 @@ const matchSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["upcoming", "live", "completed", "cancelled"],
+      enum: [
+        "upcoming",
+        "live",
+        "completed",
+        "cancelled",
+      ],
       default: "upcoming",
     },
+
+    /* =====================================================
+       PARKING ARRANGEMENT
+       ===================================================== */
+
+    parkingMode: {
+      type: String,
+      enum: [
+        "prebooking",
+        "designated",
+        "firstCome",
+        "unavailable",
+      ],
+      default: "designated",
+    },
   },
+
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Match", matchSchema);
+module.exports = mongoose.model(
+  "Match",
+  matchSchema
+);

@@ -118,6 +118,10 @@ function formatMatchDate(dateValue) {
    stadium.name
 
    into the shape used by your existing UI.
+
+   IMPORTANT:
+   parkingMode is preserved here so it reaches
+   Parking.jsx.
 ===================================================== */
 
 function normalizeMatch(match) {
@@ -206,6 +210,14 @@ function normalizeMatch(match) {
 
     matchNumber:
       match?.matchNumber,
+
+    /* =================================================
+       IMPORTANT PARKING FIELD
+    ================================================= */
+
+    parkingMode:
+      match?.parkingMode ||
+      "unavailable",
   };
 }
 
@@ -268,6 +280,24 @@ function Matches({
               ? data.matches
               : [];
 
+          /* =================================================
+             PARKING DEBUG
+             ================================================= */
+
+          console.log(
+            "MATCH PARKING MODES FROM BACKEND:",
+            backendMatches.map(
+              (item) => ({
+                id: item?._id,
+                teams: `${item?.teamA?.name || ""} vs ${
+                  item?.teamB?.name || ""
+                }`,
+                parkingMode:
+                  item?.parkingMode,
+              })
+            )
+          );
+
           const normalizedMatches =
             backendMatches.map(
               normalizeMatch
@@ -276,6 +306,24 @@ function Matches({
           console.log(
             "Normalized matches:",
             normalizedMatches
+          );
+
+          /* =================================================
+             NORMALIZED PARKING DEBUG
+             ================================================= */
+
+          console.log(
+            "NORMALIZED MATCH PARKING MODES:",
+            normalizedMatches.map(
+              (item) => ({
+                id: item?._id,
+                teams: `${item?.team1 || ""} vs ${
+                  item?.team2 || ""
+                }`,
+                parkingMode:
+                  item?.parkingMode,
+              })
+            )
           );
 
           setAllMatches(
@@ -356,6 +404,11 @@ function Matches({
       console.log(
         "REAL MATCH ID:",
         match._id
+      );
+
+      console.log(
+        "PARKING MODE:",
+        match.parkingMode
       );
 
       console.log(

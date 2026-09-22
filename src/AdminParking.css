@@ -1,0 +1,710 @@
+/* =====================================================
+   ADMIN PARKING PAGE
+===================================================== */
+
+.admin-parking-page {
+  width: 100%;
+  color: #ffffff;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-parking-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.admin-parking-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #a970ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.admin-parking-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.admin-parking-header p {
+  margin: 8px 0 0;
+  color: #8f8f9d;
+  font-size: 14px;
+}
+
+.admin-parking-add-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 19px;
+  background: #8b3dff;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-parking-add-button:hover {
+  background: #9d5aff;
+  transform: translateY(-1px);
+}
+
+.admin-parking-add-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admin-parking-add-button span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.admin-parking-error,
+.admin-parking-success {
+  border-radius: 10px;
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-parking-error {
+  border: 1px solid rgba(255, 80, 100, 0.35);
+  background: rgba(255, 60, 80, 0.08);
+  color: #ff8798;
+}
+
+.admin-parking-success {
+  border: 1px solid rgba(80, 220, 150, 0.3);
+  background: rgba(80, 220, 150, 0.08);
+  color: #71e0a7;
+}
+
+/* =====================================================
+   MATCH CARD
+===================================================== */
+
+.admin-parking-match-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 1px solid #262633;
+  border-radius: 14px;
+  background: #11111a;
+}
+
+.admin-parking-section-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #8d8d9c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.admin-parking-match-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-parking-match-select-wrapper {
+  min-width: 300px;
+}
+
+.admin-parking-match-select-wrapper label {
+  display: block;
+  margin-bottom: 7px;
+  color: #858592;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-parking-match-select-wrapper select {
+  width: 100%;
+  min-width: 300px;
+  border: 1px solid #343443;
+  border-radius: 8px;
+  outline: none;
+  padding: 11px 13px;
+  background: #191923;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-parking-match-select-wrapper select:focus {
+  border-color: #8b3dff;
+}
+
+/* =====================================================
+   CURRENT MATCH
+===================================================== */
+
+.admin-parking-current-match {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 14px 17px;
+  border: 1px solid rgba(139, 61, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(139, 61, 255, 0.07);
+}
+
+.admin-parking-match-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(139, 61, 255, 0.16);
+  font-size: 20px;
+}
+
+.admin-parking-current-match span {
+  display: block;
+  margin-bottom: 3px;
+  color: #9d73d8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.admin-parking-current-match strong {
+  display: block;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.admin-parking-current-match small {
+  display: block;
+  margin-top: 3px;
+  color: #858592;
+  font-size: 11px;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.admin-parking-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.admin-parking-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 85px;
+  padding: 17px;
+  border: 1px solid #262633;
+  border-radius: 13px;
+  background: #11111a;
+}
+
+.admin-parking-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: rgba(139, 61, 255, 0.12);
+  color: #b37aff;
+  font-size: 18px;
+}
+
+.admin-parking-stat-card strong {
+  display: block;
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.admin-parking-stat-card span {
+  display: block;
+  margin-top: 2px;
+  color: #858592;
+  font-size: 11px;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.admin-parking-form-card {
+  margin-bottom: 22px;
+  border: 1px solid #292938;
+  border-radius: 15px;
+  background: #11111a;
+  overflow: hidden;
+}
+
+.admin-parking-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 21px;
+  border-bottom: 1px solid #272733;
+}
+
+.admin-parking-form-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: #9b64e8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.admin-parking-form-heading h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-parking-close-button {
+  border: none;
+  background: transparent;
+  color: #888896;
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.admin-parking-close-button:hover {
+  color: #ffffff;
+}
+
+.admin-parking-form-card form {
+  padding: 21px;
+}
+
+.admin-parking-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.admin-parking-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admin-parking-input-group label {
+  color: #a1a1ad;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-parking-input-group input,
+.admin-parking-input-group select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #343443;
+  border-radius: 8px;
+  outline: none;
+  padding: 12px 13px;
+  background: #191923;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.admin-parking-input-group input::placeholder {
+  color: #60606c;
+}
+
+.admin-parking-input-group input:focus,
+.admin-parking-input-group select:focus {
+  border-color: #8b3dff;
+}
+
+.admin-parking-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #272733;
+}
+
+.admin-parking-cancel-button,
+.admin-parking-save-button {
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-parking-cancel-button {
+  border: 1px solid #353542;
+  background: transparent;
+  color: #aaaab5;
+}
+
+.admin-parking-cancel-button:hover {
+  border-color: #555563;
+  color: #ffffff;
+}
+
+.admin-parking-save-button {
+  border: none;
+  background: #8b3dff;
+  color: #ffffff;
+}
+
+.admin-parking-save-button:hover {
+  background: #9d5aff;
+}
+
+.admin-parking-cancel-button:disabled,
+.admin-parking-save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.admin-parking-table-card {
+  border: 1px solid #292938;
+  border-radius: 15px;
+  background: #11111a;
+  overflow: hidden;
+}
+
+.admin-parking-table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 21px;
+  border-bottom: 1px solid #272733;
+}
+
+.admin-parking-table-heading span {
+  display: block;
+  margin-bottom: 5px;
+  color: #9b64e8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.admin-parking-table-heading h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.admin-parking-count {
+  border: 1px solid #353541;
+  border-radius: 20px;
+  padding: 7px 12px;
+  color: #a9a9b4;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.admin-parking-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-parking-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.admin-parking-table th {
+  padding: 13px 18px;
+  border-bottom: 1px solid #292936;
+  background: #0e0e16;
+  color: #72727f;
+  text-align: left;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.admin-parking-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid #22222d;
+  color: #d5d5dd;
+  font-size: 12px;
+}
+
+.admin-parking-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.admin-parking-table tbody tr:hover {
+  background: rgba(139, 61, 255, 0.035);
+}
+
+.admin-parking-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-parking-slot-cell {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-parking-slot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: rgba(139, 61, 255, 0.1);
+  font-size: 14px;
+}
+
+.admin-parking-slot-cell strong {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-parking-stadium-cell {
+  color: #b7b7c2;
+  font-size: 12px;
+}
+
+.admin-parking-vehicle {
+  color: #bcbcc6;
+  font-size: 12px;
+}
+
+.admin-parking-price {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.admin-parking-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  padding: 6px 9px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.admin-parking-status span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.admin-parking-status.available {
+  background: rgba(55, 210, 130, 0.09);
+  color: #63dc9c;
+}
+
+.admin-parking-status.available span {
+  background: #63dc9c;
+}
+
+.admin-parking-status.reserved {
+  background: rgba(255, 180, 70, 0.1);
+  color: #ffbd63;
+}
+
+.admin-parking-status.reserved span {
+  background: #ffbd63;
+}
+
+.admin-parking-status.occupied {
+  background: rgba(255, 80, 100, 0.1);
+  color: #ff7f91;
+}
+
+.admin-parking-status.occupied span {
+  background: #ff7f91;
+}
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.admin-parking-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.admin-parking-edit-button,
+.admin-parking-delete-button {
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-parking-edit-button {
+  border: 1px solid rgba(139, 61, 255, 0.35);
+  background: rgba(139, 61, 255, 0.08);
+  color: #b27aff;
+}
+
+.admin-parking-edit-button:hover {
+  background: rgba(139, 61, 255, 0.17);
+}
+
+.admin-parking-delete-button {
+  border: 1px solid rgba(255, 80, 100, 0.25);
+  background: rgba(255, 80, 100, 0.06);
+  color: #ff8798;
+}
+
+.admin-parking-delete-button:hover {
+  background: rgba(255, 80, 100, 0.12);
+}
+
+.admin-parking-delete-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.admin-parking-loading {
+  padding: 55px 20px;
+  color: #858592;
+  text-align: center;
+  font-size: 13px;
+}
+
+.admin-parking-empty {
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.admin-parking-empty > div {
+  margin-bottom: 12px;
+  font-size: 35px;
+}
+
+.admin-parking-empty h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+}
+
+.admin-parking-empty p {
+  max-width: 400px;
+  margin: 7px auto 17px;
+  color: #858592;
+  font-size: 12px;
+}
+
+.admin-parking-empty button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  background: #8b3dff;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-parking-empty button:hover {
+  background: #9d5aff;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+  .admin-parking-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-parking-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-parking-match-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-parking-match-select-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-parking-match-select-wrapper select {
+    min-width: 0;
+  }
+
+  .admin-parking-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-parking-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-parking-header h2 {
+    font-size: 24px;
+  }
+
+  .admin-parking-form-actions {
+    flex-direction: column;
+  }
+
+  .admin-parking-cancel-button,
+  .admin-parking-save-button {
+    width: 100%;
+  }
+}
