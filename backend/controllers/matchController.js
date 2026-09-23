@@ -1,4 +1,6 @@
+
 const Match = require("../models/Match");
+const Seat = require("../models/Seat");
 
 // =====================================================
 // GET ALL MATCHES
@@ -150,6 +152,86 @@ const createMatch = async (req, res) => {
           parkingInstructions ||
           "",
       });
+
+    // =====================================================
+    // AUTOMATIC SEAT INVENTORY
+    // =====================================================
+    //
+    // Find an existing seat layout belonging to the
+    // selected stadium and copy it to this new match.
+    //
+    // This automatically gives the new match:
+    // - Correct stadium stands
+    // - Correct section names
+    // - Correct rows
+    // - Correct seat numbers
+    // - Correct stand prices
+    //
+    // No changes are required in SeatSelection.jsx.
+    //
+    // =====================================================
+
+    try {
+      const templateSeat =
+        await Seat.findOne({
+          stadium: stadium,
+        }).sort({ createdAt: 1 });
+
+      if (templateSeat) {
+        const templateSeats =
+          await Seat.find({
+            stadium: stadium,
+            match: templateSeat.match,
+          }).lean();
+
+        if (
+          templateSeats &&
+          templateSeats.length > 0
+        ) {
+          const newSeatData =
+            templateSeats.map(
+              (seat) => ({
+                stadium: match.stadium,
+                match: match._id,
+                seatNumber:
+                  seat.seatNumber,
+                row: seat.row,
+                section:
+                  seat.section,
+                price: seat.price,
+                status: "available",
+                lockedBy: null,
+                lockedUntil: null,
+              })
+            );
+
+          await Seat.insertMany(
+            newSeatData
+          );
+
+          console.log(
+            `Created ${newSeatData.length} seats for new match ${match._id}`
+          );
+        } else {
+          console.warn(
+            `No seat template found for stadium ${stadium}`
+          );
+        }
+      } else {
+        console.warn(
+          `No existing seat inventory found for stadium ${stadium}`
+        );
+      }
+    } catch (seatError) {
+      console.error(
+        "Automatic seat creation error:",
+        seatError
+      );
+    }
+
+    // =====================================================
+    // POPULATE CREATED MATCH
+    // =====================================================
 
     const populatedMatch =
       await Match.findById(
